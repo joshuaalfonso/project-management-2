@@ -16,7 +16,7 @@ const ProjectDetail = () => {
     return (
         <>
         
-            <div className="mb-8!">
+            <div className="mb-6!">
                 <Heading 
                     size={'2xl'}
                 >
@@ -54,7 +54,7 @@ const ProjectDetail = () => {
 
             <Tabs.Root value={currentTab}  onValueChange={(value) => navigate(value.value)}>
 
-                <Tabs.List mb={'6'}>
+                <Tabs.List mb={'8'}>
                     <Tabs.Trigger value="overview">
                         <LuList size={'20'} />
                         OverView
