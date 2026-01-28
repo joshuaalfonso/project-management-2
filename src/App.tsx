@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Project from './pages/Project/Project'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 import MyTask from './pages/MyTask/MyTask'
+import ProjectDetail from './pages/Project/pages/ProjectDetail/ProjectDetail'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-task" element={<MyTask />} />
             <Route path="/project" element={<Project />} />
+            <Route path="/project/:project_id" element={<ProjectDetail />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
 

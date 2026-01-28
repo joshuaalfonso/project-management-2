@@ -1,5 +1,6 @@
 import { Avatar, Box, Group, Heading, HStack, Progress, Stack, Text } from "@chakra-ui/react"
 import { BiCheck } from "react-icons/bi"
+import { Link } from "react-router-dom"
 
 
 
@@ -38,15 +39,27 @@ const Project = () => {
           px={'6'}
           py={'4'}
           _hover={{boxShadow: 'sm'}}
+          className="space-y-3!"
         >
-          <Heading size={'md'}>
+          {/* <Heading size={'md'}>
             Logistics Information System
-          </Heading>
-          <Text color={'fg.muted'} fontSize={'sm'} mb={'4'}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Text>
+          </Heading> */}
+          
+          <div>
+            <Heading size={'md'} mb={'1'} _hover={{textDecoration: 'underline'}}>
+              <Link 
+                to="/project/1"
+              >
+                Logistics Information System
+              </Link>
+            </Heading>
 
-          <Progress.Root maxW="100%" size={'sm'} mb={'3'}>
+            <Text fontSize={'sm'} color={'fg.muted'}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            </Text>
+          </div>
+
+          <Progress.Root maxW="100%" size={'sm'}>
             <HStack gap="3">
               <Progress.Track flex="1">
                 <Progress.Range />

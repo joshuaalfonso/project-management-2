@@ -16,7 +16,7 @@ const Layout = () => {
             <Box 
                 borderRightWidth="1px"
                 borderRightColor={useColorModeValue("gray.200", "gray.800")}
-                className="w-69 px-5!"
+                className="w-0 xl:w-69 px-0! xl:px-5! overflow-x-hidden"
             >
 
                 <div className="grid place-items-center h-12.5 mb-6!">
@@ -93,7 +93,7 @@ const Layout = () => {
                     borderRightColor={useColorModeValue("gray.200", "gray.800")}
                     className="sticky w-full h-12.5! flex justify-between items-center px-8! md:px-12! xl:px-16! py-6!"
                 >
-                    <h1>header</h1>
+                    <h1></h1>
                     <ColorModeButton />
                 </Box>
 
