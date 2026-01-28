@@ -1,6 +1,6 @@
 import { Chart, useChart } from "@chakra-ui/charts"
-import { Box, Grid, Heading, Text } from "@chakra-ui/react"
-import { Bar, BarChart, CartesianGrid, LabelList, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts"
+import { Box, Heading, Text } from "@chakra-ui/react"
+import {  Line, LineChart } from "recharts"
 
 
 
@@ -21,29 +21,29 @@ const Dashboard = () => {
     series: [{ name: "value", color: "teal.solid" }],
   })
 
-  const chart = useChart({
-    data: [
-      { allocation: 60, type: "Stock" },
-      { allocation: 45, type: "Crypto" },
-      { allocation: 12, type: "ETF" },
-      { allocation: 4, type: "Cash" },
-    ],
-    series: [{ name: "allocation", color: "teal.solid" }],
-  })
+  // const chart = useChart({
+  //   data: [
+  //     { allocation: 60, type: "Stock" },
+  //     { allocation: 45, type: "Crypto" },
+  //     { allocation: 12, type: "ETF" },
+  //     { allocation: 4, type: "Cash" },
+  //   ],
+  //   series: [{ name: "allocation", color: "teal.solid" }],
+  // })
 
-  const chart2 = useChart({
-    data: [
-      { windows: 186, mac: 80, linux: 120, month: "January" },
-      { windows: 165, mac: 95, linux: 110, month: "February" },
-      { windows: 190, mac: 87, linux: 125, month: "March" },
-      { windows: 195, mac: 88, linux: 130, month: "May" },
-    ],
-    series: [
-      { name: "windows", color: "teal.solid" },
-      { name: "mac", color: "purple.solid" },
-      { name: "linux", color: "blue.solid" },
-    ],
-  })
+  // const chart2 = useChart({
+  //   data: [
+  //     { windows: 186, mac: 80, linux: 120, month: "January" },
+  //     { windows: 165, mac: 95, linux: 110, month: "February" },
+  //     { windows: 190, mac: 87, linux: 125, month: "March" },
+  //     { windows: 195, mac: 88, linux: 130, month: "May" },
+  //   ],
+  //   series: [
+  //     { name: "windows", color: "teal.solid" },
+  //     { name: "mac", color: "purple.solid" },
+  //     { name: "linux", color: "blue.solid" },
+  //   ],
+  // })
 
   return (
     <>
