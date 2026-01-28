@@ -7,6 +7,10 @@ import Project from './pages/Project/Project'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 import MyTask from './pages/MyTask/MyTask'
 import ProjectDetail from './pages/Project/pages/ProjectDetail/ProjectDetail'
+import Overview from './pages/Project/pages/ProjectDetail/Overview/Overview'
+import Task from './pages/Project/pages/ProjectDetail/Task/Task'
+import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachment'
+import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
 
 function App() {
 
@@ -22,7 +26,13 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-task" element={<MyTask />} />
             <Route path="/project" element={<Project />} />
-            <Route path="/project/:project_id" element={<ProjectDetail />} />
+            <Route path="/project/:project_id" element={<ProjectDetail />} >
+              <Route index element={<Navigate to="overview" replace />} /> {/* default tab */}
+              <Route path="overview" element={<Overview />} />
+              <Route path="task" element={<Task />} />
+              <Route path="attachment" element={<Attachment />} />
+              <Route path="setting" element={<Setting />} />
+            </Route>
             <Route path="*" element={<PageNotFound />} />
           </Route>
 

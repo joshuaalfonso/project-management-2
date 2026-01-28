@@ -50,7 +50,7 @@ const Project = () => {
               <Link 
                 to="/project/1"
               >
-                Logistics Information System
+                TaskFlow
               </Link>
             </Heading>
 

@@ -1,11 +1,16 @@
 import { Heading, Tabs, Text } from "@chakra-ui/react"
 import { BiCalendar, BiCheck, BiGroup } from "react-icons/bi";
 import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
-import { useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 
 const ProjectDetail = () => {
 
     const { project_id } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const currentTab = location.pathname.split("/").pop() ?? "overview";
+
     console.log(project_id)
 
     return (
@@ -15,7 +20,7 @@ const ProjectDetail = () => {
                 <Heading 
                     size={'2xl'}
                 >
-                    Logistics Information System
+                    TaskFlow
                 </Heading>
                 <div className="flex gap-3 mt-2!">
                     <Text 
@@ -47,8 +52,9 @@ const ProjectDetail = () => {
             </div>
 
 
-            <Tabs.Root defaultValue="overview">
-                <Tabs.List>
+            <Tabs.Root value={currentTab}  onValueChange={(value) => navigate(value.value)}>
+
+                <Tabs.List mb={'6'}>
                     <Tabs.Trigger value="overview">
                         <LuList size={'20'} />
                         OverView
@@ -66,14 +72,9 @@ const ProjectDetail = () => {
                         Setting
                     </Tabs.Trigger>
                 </Tabs.List>
-                <Tabs.Content value="overview">Manage your project overview</Tabs.Content>
-                <Tabs.Content value="task">Manage your projects</Tabs.Content>
-                <Tabs.Content value="attachment">
-                    Manage your tasks for freelancers
-                </Tabs.Content>
-                <Tabs.Content value="setting">
-                    Manage your project setting
-                </Tabs.Content>
+
+                <Outlet />
+
             </Tabs.Root>
         
         
