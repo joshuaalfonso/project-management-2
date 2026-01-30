@@ -7,7 +7,7 @@ const MyTask = () => {
 
   const fetchData = async () => {
 
-      const response = await fetch('localhost:3000/testing');
+      const response = await fetch('http://localhost:3000/testing');
 
       const data = await response.json();
 
