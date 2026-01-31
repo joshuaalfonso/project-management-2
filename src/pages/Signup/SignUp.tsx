@@ -1,25 +1,30 @@
 import { PasswordInput } from "@/components/ui/password-input"
-import { Button, Field, Fieldset, HStack, Input, Separator, Stack, Text } from "@chakra-ui/react"
-import { GrGoogle } from "react-icons/gr"
+import { Button, Field, Fieldset, Input, Stack, Text } from "@chakra-ui/react"
 import { Link as RouterLink  } from "react-router-dom"
 
 
 
 
-const Login = () => {
+const SignUp = () => {
   return (
     <>
 
       <div className="grid place-items-center h-svh w-full ">
         <Fieldset.Root size="lg" maxW="md">
           <Stack>
-            <Fieldset.Legend fontSize={'xl'}>Welcome! Glad to see you.</Fieldset.Legend>
-            <Fieldset.HelperText>
+            <Fieldset.Legend fontSize={'xl'}>Hello! Register to get started.</Fieldset.Legend>
+            {/* <Fieldset.HelperText>
               Please enter details to sign in.
-            </Fieldset.HelperText>
+            </Fieldset.HelperText> */}
           </Stack>
 
           <Fieldset.Content>
+
+            <Field.Root>
+              <Field.Label>Full Name</Field.Label>
+              <Input name="email" type="text" autoComplete="off" />
+            </Field.Root>
+
             <Field.Root>
               <Field.Label>Email</Field.Label>
               <Input name="email" type="email" autoComplete="off" />
@@ -37,40 +42,26 @@ const Login = () => {
             alignSelf="flex-start"
             width={'full'}
           >
-            Sign in
+            Register
           </Button>
 
-          <HStack>
-            <Separator flex="1" />
-            <Text 
-              flexShrink="0" 
-              textTransform={'capitalize'}
-              fontSize={'xs'}
-              color={'fg.muted'}
-              >
-                Or continue with
-            </Text>
-            <Separator flex="1" />
-          </HStack>
-
-          <Button  variant="outline">
-            <GrGoogle /> Google
-          </Button>
-
+    
           <div className="flex items-center justify-center">
+
             <Text 
               fontSize={'sm'}
               color={'fg.muted'}
               >
-                Don't have an account? 
+                Already have an account? 
             </Text>
+
             &nbsp;
             &nbsp;
-            {/* <Link fontSize={'sm'} fontWeight={'medium'}> */}
-              <RouterLink to="/signup" className="text-sm! font-medium! hover:underline!">
-                Sign up
-              </RouterLink>
-            {/* </Link> */}
+
+            <RouterLink to="/login" className="text-sm! font-medium! hover:underline!">
+              Log in
+            </RouterLink>
+            
           </div>
 
         </Fieldset.Root>
@@ -81,4 +72,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignUp

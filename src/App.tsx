@@ -11,6 +11,7 @@ import Overview from './pages/Project/pages/ProjectDetail/Overview/Overview'
 import Task from './pages/Project/pages/ProjectDetail/Task/Task'
 import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachment'
 import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
+import SignUp from './pages/Signup/SignUp'
 
 function App() {
 
@@ -19,7 +20,9 @@ function App() {
       <BrowserRouter> 
         <Routes>
 
+          <Route index element={<Navigate to='/login' replace />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
           <Route element={<Layout />}>
             <Route index element={<Navigate to='/dashboard' replace />} />

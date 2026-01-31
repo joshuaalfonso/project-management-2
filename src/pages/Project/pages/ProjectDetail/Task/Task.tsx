@@ -1,4 +1,5 @@
-import { Avatar, Badge, Checkbox, Heading, Table } from "@chakra-ui/react"
+import { Avatar, Badge, Heading, Table, Text } from "@chakra-ui/react"
+import { FiClock } from "react-icons/fi"
 
 const Task = () => {
 
@@ -38,17 +39,18 @@ const Task = () => {
                   color={'fg.muted'}
                   borderBottom={index === todo.length - 1 ? 'none' : undefined}
                 >
-                  <Table.Cell>
-                    <Checkbox.Root variant={'outline'} size={'sm'}>
-                      <Checkbox.HiddenInput />
-                      <Checkbox.Control />
-                    </Checkbox.Root>
-                  </Table.Cell>
+                
                   <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>
                     <Badge colorPalette="yellow">Bug</Badge>
                   </Table.Cell>
-                  <Table.Cell>July 11</Table.Cell>
+                  <Table.Cell>
+                    <div className="flex items-center gap-2">
+                      <FiClock /> 
+                      <Text fontSize={'sm'} color={'fg.muted'}>12 days left</Text>
+                    </div>
+                  </Table.Cell>
+                  {/* <Table.Cell>July 11</Table.Cell> */}
                   <Table.Cell textAlign="end">
                     <Avatar.Root size={'xs'}>
                       <Avatar.Fallback name="Segun Adebayo" />
@@ -81,17 +83,18 @@ const Task = () => {
                   color={'fg.muted'}
                   borderBottom={index === inProgress.length - 1 ? 'none' : undefined}
                 >
-                  <Table.Cell>
-                    <Checkbox.Root variant={'outline'} size={'sm'}>
-                      <Checkbox.HiddenInput />
-                      <Checkbox.Control />
-                    </Checkbox.Root>
-                  </Table.Cell>
+                
                   <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>
                     <Badge colorPalette="purple">Low priority</Badge>
                   </Table.Cell>
-                  <Table.Cell>July 11</Table.Cell>
+                   <Table.Cell>
+                    <div className="flex items-center gap-2">
+                      <FiClock /> 
+                      <span>12 days left</span>
+                    </div>
+                  </Table.Cell>
+                  {/* <Table.Cell>July 11</Table.Cell> */}
                   <Table.Cell textAlign="end">
                     <Avatar.Root size={'xs'}>
                       <Avatar.Fallback name="Segun Adebayo" />
