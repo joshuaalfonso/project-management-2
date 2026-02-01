@@ -48,7 +48,7 @@ const Project = () => {
           <div>
             <Heading size={'md'} mb={'1'} _hover={{textDecoration: 'underline'}}>
               <Link 
-                to="/project/1"
+                to="/project/1/overview"
               >
                 TaskFlow
               </Link>

@@ -1,12 +1,13 @@
 import { Box, Heading, Text } from "@chakra-ui/react"
 
 
-
 const Overview = () => {
   return (
     <>
     
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        <div 
+            className="grid grid-cols-1 xl:grid-cols-3 gap-5"
+        >
 
             <div className="col-span-2">
 

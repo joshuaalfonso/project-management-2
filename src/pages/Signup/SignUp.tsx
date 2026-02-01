@@ -1,5 +1,5 @@
 import { PasswordInput } from "@/components/ui/password-input"
-import { Button, Field, Fieldset, Input, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Field, Fieldset, Input, Stack, Text } from "@chakra-ui/react"
 import { Link as RouterLink  } from "react-router-dom"
 
 
@@ -9,8 +9,11 @@ const SignUp = () => {
   return (
     <>
 
-      <div className="grid place-items-center h-svh w-full ">
-        <Fieldset.Root size="lg" maxW="md">
+      <Box 
+        className="grid place-items-center h-svh w-full "  
+        bg={'bg.subtle'} 
+      >
+        <Fieldset.Root size="lg" maxW="md" px={'6'}>
           <Stack>
             <Fieldset.Legend fontSize={'xl'}>Hello! Register to get started.</Fieldset.Legend>
             {/* <Fieldset.HelperText>
@@ -61,11 +64,11 @@ const SignUp = () => {
             <RouterLink to="/login" className="text-sm! font-medium! hover:underline!">
               Log in
             </RouterLink>
-            
+
           </div>
 
         </Fieldset.Root>
-      </div>
+      </Box>
     
     
     </>
