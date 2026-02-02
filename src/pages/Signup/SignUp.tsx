@@ -1,11 +1,29 @@
 import { PasswordInput } from "@/components/ui/password-input"
 import { Box, Button, Field, Fieldset, Input, Stack, Text } from "@chakra-ui/react"
-import { Link as RouterLink  } from "react-router-dom"
+import { Link as RouterLink  } from "react-router-dom";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 
 
+interface SignUpFormValues {
+  name: string;
+  email: string;
+  password: string;
+}
 
 const SignUp = () => {
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormValues>();
+
+  const onSubmit: SubmitHandler<SignUpFormValues> = (data) => {
+    console.log("Form data:", data);
+  };
+
   return (
     <>
 
@@ -13,61 +31,89 @@ const SignUp = () => {
         className="grid place-items-center h-svh w-full "  
         bg={'bg.subtle'} 
       >
-        <Fieldset.Root size="lg" maxW="md" px={'6'}>
-          <Stack>
-            <Fieldset.Legend fontSize={'xl'}>Hello! Register to get started.</Fieldset.Legend>
-            {/* <Fieldset.HelperText>
-              Please enter details to sign in.
-            </Fieldset.HelperText> */}
-          </Stack>
+        {/* size="lg" maxW="md" */}
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+          <Fieldset.Root size="lg" maxW="md" px="6">
+            <Stack>
+              <Fieldset.Legend fontSize="xl">
+                Hello! Register to get started.
+              </Fieldset.Legend>
+              <Fieldset.HelperText>All fields are required.</Fieldset.HelperText>
+            </Stack>
 
-          <Fieldset.Content>
+            <Fieldset.Content>
+              {/* Full Name */}
+              <Field.Root>
+                <Field.Label>Full Name</Field.Label>
+                <Input
+                  type="text"
+                  autoComplete="off"
+                  {...register("name", { required: "Full name is required" })}
+                />
+                {errors.name && (
+                  <Text color="fg.error" fontSize="sm">
+                    {errors.name.message}
+                  </Text>
+                )}
+              </Field.Root>
 
-            <Field.Root>
-              <Field.Label>Full Name</Field.Label>
-              <Input name="email" type="text" autoComplete="off" />
-            </Field.Root>
+              {/* Email */}
+              <Field.Root>
+                <Field.Label>Email</Field.Label>
+                <Input
+                  type="email"
+                  autoComplete="off"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <Text color="fg.error" fontSize="sm">
+                    {errors.email.message}
+                  </Text>
+                )}
+              </Field.Root>
 
-            <Field.Root>
-              <Field.Label>Email</Field.Label>
-              <Input name="email" type="email" autoComplete="off" />
-            </Field.Root>
+              {/* Password */}
+              <Field.Root>
+                <Field.Label>Password</Field.Label>
+                <PasswordInput
+                  autoComplete="off"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  })}
+                />
+                {errors.password && (
+                  <Text color="fg.error" fontSize="sm">
+                    {errors.password.message}
+                  </Text>
+                )}
+              </Field.Root>
+            </Fieldset.Content>
 
-            <Field.Root>
-              <Field.Label>Password</Field.Label>
-              {/* <Input name="email" type="email" /> */}
-               <PasswordInput autoComplete="off"/>
-            </Field.Root>
-          </Fieldset.Content>
+            <Button type="submit" alignSelf="flex-start" width="full" loading ={isSubmitting}>
+              Register
+            </Button>
 
-          <Button 
-            type="submit" 
-            alignSelf="flex-start"
-            width={'full'}
-          >
-            Register
-          </Button>
-
-    
-          <div className="flex items-center justify-center">
-
-            <Text 
-              fontSize={'sm'}
-              color={'fg.muted'}
+            <div className="flex items-center justify-center mt-4">
+              <Text fontSize="sm" color="fg.muted">
+                Already have an account?
+              </Text>
+              &nbsp;&nbsp;
+              <RouterLink
+                to="/login"
+                className="text-sm! font-medium! hover:underline!"
               >
-                Already have an account? 
-            </Text>
-
-            &nbsp;
-            &nbsp;
-
-            <RouterLink to="/login" className="text-sm! font-medium! hover:underline!">
-              Log in
-            </RouterLink>
-
-          </div>
-
-        </Fieldset.Root>
+                Log in
+              </RouterLink>
+            </div>
+          </Fieldset.Root>
+        </form>
       </Box>
     
     

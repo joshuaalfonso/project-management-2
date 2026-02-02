@@ -1,10 +1,11 @@
-import { Heading, Tabs, Text } from "@chakra-ui/react"
+import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
+import {  Heading, Tabs, Text } from "@chakra-ui/react"
 // import { AnimatePresence } from "framer-motion";
 import { BiCalendar, BiCheck, BiGroup } from "react-icons/bi";
 import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
 // import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
+import {  useLocation, useNavigate, useParams } from "react-router-dom";
+// import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
 
 const ProjectDetail = () => {
 
@@ -43,7 +44,7 @@ const ProjectDetail = () => {
                 >
                     TaskFlow
                 </Heading>
-                <div className="flex gap-3 mt-2!">
+                <div className="flex flex-wrap gap-3 mt-2!">
                     <Text 
                         fontSize={'sm'} 
                         color={'fg.muted'}
@@ -77,7 +78,11 @@ const ProjectDetail = () => {
                 onValueChange={(value: { value: string }) => navigate(`/project/${project_id}/${value.value}`)}
             >
 
-                <Tabs.List mb={'8'}>
+
+                <Tabs.List 
+                    mb={'8'}  
+                    
+                >
                     <Tabs.Trigger value="overview">
                         <LuList size={'20'} />
                         OverView
@@ -97,6 +102,9 @@ const ProjectDetail = () => {
                 </Tabs.List>
 
                 <AnimatedProjectRoutes />
+
+                {/* <Outlet /> */}
+
 
             </Tabs.Root>
 

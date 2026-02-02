@@ -97,7 +97,7 @@ const Layout = () => {
                     <ColorModeButton />
                 </Box>
 
-                <main className="px-8! md:px-12! xl:px-16! py-6! ">
+                <main className="px-8! md:px-12! xl:px-16! py-6! overflow-x-hidden!">
                     <Outlet />
                 </main>
 

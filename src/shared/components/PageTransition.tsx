@@ -12,12 +12,12 @@ const PageTransition = ({ children }: PageTransitionProps) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{
-                duration: 0.1,
-                ease: [0.4, 0, 0.2, 1],
+                duration: 0.05,
+                ease: [0.2, 0, 0.2, 1],
             }}
             style={{ height: "100%" }}
         >
-        {children}
+            {children}
         </motion.div>
     );
 };
