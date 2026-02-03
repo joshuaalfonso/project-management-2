@@ -15,6 +15,8 @@ import SignUp from './pages/Signup/SignUp'
 import Overview from './pages/Project/pages/ProjectDetail/Overview/Overview'
 import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachment'
 import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
+import { Toaster } from './components/ui/toaster'
+import { ProtectedRoutes } from './context/auth/ProtectedRoutes'
 
 function App() {
 
@@ -27,7 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
 
-          <Route element={<Layout />}>
+          <Route element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
             <Route index element={<Navigate to='/dashboard' replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-task" element={<MyTask />} />
@@ -35,7 +37,6 @@ function App() {
             <Route path="/project/:project_id/*" element={<ProjectDetail />} >
               <Route index element={<Navigate to="overview" replace />} />
               <Route path="overview" element={<Overview  />} />
-              <Route path="task" element={<MyTask /> } />
               <Route path="task" element={<MyTask /> } />
               <Route path="attachment" element={<Attachment />} />
               <Route path="setting" element={<Setting /> } />
@@ -47,6 +48,8 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+
+      <Toaster />
     </>
   )
 }

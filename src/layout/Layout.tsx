@@ -1,7 +1,8 @@
-import { ColorModeButton, useColorModeValue } from "@/components/ui/color-mode"
+import { useColorModeValue } from "@/components/ui/color-mode"
 import { Box, Text } from "@chakra-ui/react"
 import { FiFolder, FiGrid, FiList } from "react-icons/fi"
 import { NavLink, Outlet } from "react-router-dom"
+import Header from "./Components/Header"
 
 
 const Layout = () => {
@@ -88,14 +89,7 @@ const Layout = () => {
 
             <div className="flex-1">
 
-                <Box
-                    borderBottomWidth="1px"
-                    borderRightColor={useColorModeValue("gray.200", "gray.800")}
-                    className="sticky w-full h-12.5! flex justify-between items-center px-8! md:px-12! xl:px-16! py-6!"
-                >
-                    <h1></h1>
-                    <ColorModeButton />
-                </Box>
+                <Header />
 
                 <main className="px-8! md:px-12! xl:px-16! py-6! overflow-x-hidden!">
                     <Outlet />

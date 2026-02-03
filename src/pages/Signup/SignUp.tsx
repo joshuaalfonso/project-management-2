@@ -1,7 +1,9 @@
 import { PasswordInput } from "@/components/ui/password-input"
 import { Box, Button, Field, Fieldset, Input, Stack, Text } from "@chakra-ui/react"
-import { Link as RouterLink  } from "react-router-dom";
+import { Link as RouterLink, useNavigate  } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { useSignup } from "./useSignUp";
+import { toaster } from "@/components/ui/toaster";
 
 
 
@@ -13,16 +15,44 @@ interface SignUpFormValues {
 
 const SignUp = () => {
 
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset
   } = useForm<SignUpFormValues>();
+  // reset
+
+  const { signUpMutation, isPending } = useSignup();
 
   const onSubmit: SubmitHandler<SignUpFormValues> = (data) => {
-    console.log("Form data:", data);
+    // console.log("Form data:", data);
+    signUpMutation(
+      data,
+      {
+        onSuccess: ({message}) => {
+          toaster.create({
+            title: "Hooray 🥳🥳🥳!!!",
+            description: message || 'You are successfully registered!',
+            type: "info",
+            duration: 5000
+          })
+          reset();
+          navigate('/login')
+        },
+        onError(error) {
+          toaster.create({
+            description: error.message || 'Something went wrong',
+            type: "error",
+          })
+        },
+      }
+    )
+
   };
+
 
   return (
     <>
@@ -85,7 +115,7 @@ const SignUp = () => {
                   autoComplete="off"
                   {...register("password", {
                     required: "Password is required",
-                    minLength: { value: 6, message: "Password must be at least 6 characters" },
+                    minLength: { value: 8, message: "Password must be at least 8 characters" },
                   })}
                 />
                 {errors.password && (
@@ -96,7 +126,7 @@ const SignUp = () => {
               </Field.Root>
             </Fieldset.Content>
 
-            <Button type="submit" alignSelf="flex-start" width="full" loading ={isSubmitting}>
+            <Button type="submit" alignSelf="flex-start" width="full" loading ={isSubmitting || isPending}>
               Register
             </Button>
 
