@@ -72,7 +72,7 @@ const SignUp = () => {
             </Stack>
 
             <Fieldset.Content>
-              {/* Full Name */}
+
               <Field.Root>
                 <Field.Label>Full Name</Field.Label>
                 <Input
@@ -87,7 +87,6 @@ const SignUp = () => {
                 )}
               </Field.Root>
 
-              {/* Email */}
               <Field.Root>
                 <Field.Label>Email</Field.Label>
                 <Input

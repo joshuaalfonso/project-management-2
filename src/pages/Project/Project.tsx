@@ -1,5 +1,6 @@
-import { Avatar, Box, Group, Heading, HStack, Progress, Stack, Text } from "@chakra-ui/react"
+import { Avatar, Box, Button, Group, Heading, HStack, Progress, Stack, Text } from "@chakra-ui/react"
 import { BiCheck } from "react-icons/bi"
+import { FiPlus } from "react-icons/fi"
 import { Link } from "react-router-dom"
 
 
@@ -22,12 +23,22 @@ const Project = () => {
   ]
   return (
     <>
-      <Heading 
-        size={'2xl'}
-        mb={'10'}
-      >
-        Project
-      </Heading>
+      
+      <div className="mb-10! flex items-center justify-between">
+
+
+        <Heading 
+          size={'2xl'}
+        >
+          Project
+        </Heading>
+
+        <Button size={'xs'}>
+          <FiPlus />
+          Create
+        </Button>
+        
+      </div>
 
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
@@ -68,7 +79,7 @@ const Project = () => {
             </HStack>
           </Progress.Root>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
 
             <Text 
               fontSize={'sm'} 
@@ -94,7 +105,7 @@ const Project = () => {
               </Group>
             </Stack>
 
-          </div>
+          </div> */}
 
         </Box>
 
