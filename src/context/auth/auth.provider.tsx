@@ -2,7 +2,9 @@ import { useState } from "react";
 import type { User } from "@/model/login.model";
 import { AuthContext } from "@/context/auth/authContext";
 
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+
 
     const [token, setToken] = useState<string | null>(() => {
         return localStorage.getItem("token");
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(null);
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        localStorage.removeItem("last_workspace_id");
     };
 
     const value = {

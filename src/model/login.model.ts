@@ -11,7 +11,8 @@ export interface LoginResponse {
   success: boolean
   message: string
   token: string
-  user: User
+  user: User,
+  workspace: WorkSpace
 }
 
 export interface User {
@@ -20,7 +21,7 @@ export interface User {
   email: string
   password: string
   google_id: string | null
-  created_at: string
+  created_at: string,
 }
 
 export interface AuthContextType {
@@ -29,4 +30,10 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   login: (token: string, user: User) => void;
   logout: () => void;
+}
+
+
+export interface WorkSpace {
+  workspace_id: number
+  workspace_name: string
 }

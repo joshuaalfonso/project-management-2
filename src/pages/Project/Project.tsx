@@ -21,6 +21,7 @@ const Project = () => {
       src: 'https://avatars.githubusercontent.com/u/153984143?v=4',
     },
   ]
+  
   return (
     <>
       
@@ -79,7 +80,7 @@ const Project = () => {
             </HStack>
           </Progress.Root>
 
-          {/* <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
 
             <Text 
               fontSize={'sm'} 
@@ -105,7 +106,7 @@ const Project = () => {
               </Group>
             </Stack>
 
-          </div> */}
+          </div>
 
         </Box>
 

@@ -7,6 +7,7 @@ import { useLogIn } from "./useLogin";
 import { toaster } from "@/components/ui/toaster";
 import { getErrorMessage } from "@/lib/axios";
 import { useAuth } from "@/context/auth/useAuth";
+import { useWorkSpace } from "@/context/workspace/useWorkspace";
 
 
 interface LoginFormValues {
@@ -17,6 +18,7 @@ interface LoginFormValues {
 const Login = () => {
 
   const { login } = useAuth();
+  const { setActiveWorkspace } = useWorkSpace();
 
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ const Login = () => {
       {
         onSuccess: (response) => {
           login(response.token, response.user);
+          setActiveWorkspace(response.workspace)
           navigate("/dashboard")
         },
         onError: (error) => {

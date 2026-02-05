@@ -1,3 +1,4 @@
+import { useWorkSpace } from "@/context/workspace/useWorkspace"
 import { Avatar, Badge, Box, Group, Heading, Separator, Stack, Text } from "@chakra-ui/react"
 import { BiComment } from "react-icons/bi"
 import { FiClock } from "react-icons/fi"
@@ -7,6 +8,7 @@ import { GrAttachment } from "react-icons/gr"
 
 const MyTask = () => {
 
+  const { activeWorkspace } = useWorkSpace();
 
   const users = [
     {
@@ -26,7 +28,7 @@ const MyTask = () => {
   return (
     <>
       <Heading mb={'10'}>
-        My Task
+        My Task { activeWorkspace?.workspace_name ?? '-' }
       </Heading>
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
