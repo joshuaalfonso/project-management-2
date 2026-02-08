@@ -17,6 +17,8 @@ import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachmen
 import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
 import { Toaster } from './components/ui/toaster'
 import { ProtectedRoutes } from './context/auth/ProtectedRoutes'
+import WorkspaceMember from './pages/WorkspaceMember/WorkspaceMember'
+import WorkspaceSetting from './pages/WorkspaceSetting/WorkspaceSetting'
 
 function App() {
 
@@ -41,6 +43,8 @@ function App() {
               <Route path="attachment" element={<Attachment />} />
               <Route path="setting" element={<Setting /> } />
             </Route>
+              <Route path="/workspace-member" element={<WorkspaceMember />} />
+              <Route path="/workspace-setting" element={<WorkspaceSetting />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
 
