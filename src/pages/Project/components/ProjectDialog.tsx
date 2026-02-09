@@ -2,6 +2,10 @@ import { Button, CloseButton, Dialog, Field, Fieldset, Input, Portal, Stack, Tex
 import { FiPlus } from "react-icons/fi"
 import { useProjectDialog } from "../hooks/useProjectDialog"
 import { useForm, type SubmitHandler } from "react-hook-form"
+import { useWorkSpace } from "@/context/workspace/useWorkspace"
+import { useCreateProject } from "../hooks/useCreateProject"
+import { toaster } from "@/components/ui/toaster"
+import { getErrorMessage } from "@/lib/axios"
 
 
 interface ProjectFormvalues {
@@ -13,6 +17,8 @@ interface ProjectFormvalues {
 const ProjectDialog = () => {
 
     const { open, setOpen } = useProjectDialog();
+    const { activeWorkspace } = useWorkSpace();
+    const { createProjectMutation, isCreating } = useCreateProject();
 
     const {
         register,
@@ -22,7 +28,37 @@ const ProjectDialog = () => {
     } = useForm<ProjectFormvalues>();
 
     const onSubmit: SubmitHandler<ProjectFormvalues> = (data) => {
-        console.log(data)
+
+        const workspace_id = activeWorkspace?.workspace_id ?? 0;
+        if (!workspace_id) return;
+
+        createProjectMutation(
+            {
+                ...data, 
+                workspace_id
+            },
+            {
+                onSuccess: (response) => {
+                    toaster.create({
+                        description: response.message,
+                        type: "info",
+                        duration: 5000
+                    })
+                    setOpen(false)
+                },
+                onError: (error) => {
+                    console.error(error)
+                    const errorMessage = getErrorMessage(error);
+                    toaster.create({
+                        description: errorMessage,
+                        type: "info",
+                        duration: 5000
+                    })
+                }
+            }
+        )
+
+        // console.log(data)
     }   
 
     return (
@@ -107,7 +143,7 @@ const ProjectDialog = () => {
                             </Button>
                         </Dialog.ActionTrigger>
                         <Button 
-                            loading={isSubmitting} 
+                            loading={isSubmitting || isCreating} 
                             onClick={handleSubmit(onSubmit)}
                             size={'sm'}
                         >

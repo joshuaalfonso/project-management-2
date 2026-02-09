@@ -14,9 +14,8 @@ export interface ProjectList {
 
 
 export interface CreateEditProject {
-  project_id: number | null
+  project_id?: number | null
   project_name: string
   project_description: string
-  ownder_id: number
   workspace_id: number
 }

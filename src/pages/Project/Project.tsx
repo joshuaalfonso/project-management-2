@@ -1,28 +1,36 @@
-import { Avatar, Box, Group, Heading, HStack, Progress, Stack, Text } from "@chakra-ui/react"
-import { BiCheck } from "react-icons/bi"
+import {  Box, Heading, Text } from "@chakra-ui/react"
+// import { BiCheck } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import ProjectDialog from "./components/ProjectDialog"
 import { ProjectDialogProvider } from "./hooks/useProjectDialog"
+import { useProject } from "./hooks/useProject"
 
 
 
 const Project = () => {
 
 
-  const users = [
-    {
-      name: 'Christian Schröter',
-      src: 'https://avatars.githubusercontent.com/u/1846056?v=4',
-    },
-    {
-      name: 'Segun Adebayo',
-      src: 'https://avatars.githubusercontent.com/u/6916170?v=4',
-    },
-    {
-      name: 'Philipp Körner',
-      src: 'https://avatars.githubusercontent.com/u/153984143?v=4',
-    },
-  ]
+  // const users = [
+  //   {
+  //     name: 'Christian Schröter',
+  //     src: 'https://avatars.githubusercontent.com/u/1846056?v=4',
+  //   },
+  //   {
+  //     name: 'Segun Adebayo',
+  //     src: 'https://avatars.githubusercontent.com/u/6916170?v=4',
+  //   },
+  //   {
+  //     name: 'Philipp Körner',
+  //     src: 'https://avatars.githubusercontent.com/u/153984143?v=4',
+  //   },
+  // ]
+
+  const { projects, isPending, error } = useProject();
+
+  if (isPending) return <p>Loading..</p>;
+  if (error) return <p>Failed to load project</p>;
+
+  console.log(projects)
   
   return (
     <>
@@ -50,7 +58,36 @@ const Project = () => {
 
         <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
 
-          <Box
+          {projects?.map((item) => (
+            <Box
+              key={item.project_id}
+              borderWidth="1px"
+              borderColor="border.disabled"
+              rounded={'md'}
+              px={'6'}
+              py={'4'}
+              _hover={{boxShadow: 'sm'}}
+              className="space-y-3!"
+            >
+              
+              <div>
+                <Heading size={'md'} mb={'1'} _hover={{textDecoration: 'underline'}}>
+                  <Link 
+                    to={`/project/${item.project_id}/overview`}
+                  >
+                    { item.project_name }
+                  </Link>
+                </Heading>
+
+                <Text fontSize={'sm'} color={'fg.muted'}>
+                  { item.project_description }
+                </Text>
+              </div>
+
+            </Box>
+          ))}
+
+          {/* <Box
             borderWidth="1px"
             borderColor="border.disabled"
             rounded={'md'}
@@ -59,9 +96,6 @@ const Project = () => {
             _hover={{boxShadow: 'sm'}}
             className="space-y-3!"
           >
-            {/* <Heading size={'md'}>
-              Logistics Information System
-            </Heading> */}
             
             <div>
               <Heading size={'md'} mb={'1'} _hover={{textDecoration: 'underline'}}>
@@ -114,7 +148,7 @@ const Project = () => {
 
             </div>
 
-          </Box>
+          </Box> */}
 
 
         </div>
