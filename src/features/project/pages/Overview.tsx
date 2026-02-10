@@ -11,7 +11,7 @@ const Overview = () => {
             <div className="col-span-2">
 
                 <Heading mb={'2'}>
-                    Project Goal
+                    Project Goal 
                 </Heading>
 
                 <Text color={'fg.muted'} mb={'7'}>

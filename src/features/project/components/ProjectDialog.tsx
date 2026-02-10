@@ -1,11 +1,13 @@
-import { Button, CloseButton, Dialog, Field, Fieldset, Input, Portal, Stack, Text, Textarea } from "@chakra-ui/react"
+import { Button, CloseButton, Dialog, Field, Fieldset, Input, Portal, Stack, Text } from "@chakra-ui/react"
 import { FiPlus } from "react-icons/fi"
 import { useProjectDialog } from "../hooks/useProjectDialog"
-import { useForm, type SubmitHandler } from "react-hook-form"
+import { Controller, useForm, type SubmitHandler } from "react-hook-form"
 import { useWorkSpace } from "@/context/workspace/useWorkspace"
 import { useCreateProject } from "../hooks/useCreateProject"
 import { toaster } from "@/components/ui/toaster"
 import { getErrorMessage } from "@/lib/axios"
+import TiptapEditor from "@/shared/components/TiptapEdit"
+// import { TextEditor } from "@/shared/components/TextEditor"
 
 
 interface ProjectFormvalues {
@@ -16,6 +18,7 @@ interface ProjectFormvalues {
 
 const ProjectDialog = () => {
 
+
     const { open, setOpen } = useProjectDialog();
     const { activeWorkspace } = useWorkSpace();
     const { createProjectMutation, isCreating } = useCreateProject();
@@ -23,9 +26,10 @@ const ProjectDialog = () => {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors, isSubmitting },
         reset
-    } = useForm<ProjectFormvalues>();
+    } = useForm<ProjectFormvalues>({defaultValues: {project_description: "<p>Enter project description here...</p>"}});
 
     const onSubmit: SubmitHandler<ProjectFormvalues> = (data) => {
 
@@ -60,6 +64,7 @@ const ProjectDialog = () => {
 
         // console.log(data)
     }   
+    
 
     return (
         <Dialog.Root 
@@ -112,7 +117,7 @@ const ProjectDialog = () => {
                                         )}
                                     </Field.Root>
 
-                                    <Field.Root>
+                                    {/* <Field.Root>
                                         <Field.Label>Description</Field.Label>
                                         <Textarea 
                                             {...register("project_description", { required: "Description is required" })}
@@ -123,10 +128,29 @@ const ProjectDialog = () => {
                                                 {errors.project_description.message}
                                             </Text>
                                         )}
+                                    </Field.Root> */}
+
+                                    <Field.Root>
+                                        <Field.Label>Description</Field.Label>
+                                        <div className="w-full">
+                                            <Controller
+                                                name="project_description"
+                                                control={control}
+                                                render={({ field }) => (
+                                                     <TiptapEditor
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                    />
+                                                )}
+                                            /> 
+                                        </div>
                                     </Field.Root>
 
+
+                                     {/* <TextEditor /> */}
+
                                 
-                                </Fieldset.Content>
+                                </Fieldset.Content> 
 
                             
                             </Fieldset.Root>

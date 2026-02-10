@@ -1,7 +1,7 @@
-import Attachment from "@/pages/Project/pages/ProjectDetail/Attachment/Attachment";
-import Overview from "@/pages/Project/pages/ProjectDetail/Overview/Overview";
-import Setting from "@/pages/Project/pages/ProjectDetail/Setting/Setting";
-import Task from "@/pages/Project/pages/ProjectDetail/Task/Task";
+import Attachment from "@/features/project/pages/Attachment";
+import Overview from "@/features/project/pages/Overview";
+import Setting from "@/features/project/pages/Setting";
+import Task from "@/features/project/pages/Task";
 import { AnimatePresence } from "framer-motion";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import PageTransition from "./PageTransition";
@@ -19,7 +19,7 @@ const AnimatedProjectRoutes = () => {
         <Route path="setting" element={<PageTransition><Setting /></PageTransition>} />
       </Routes>
     </AnimatePresence>
-  );
-};
+  ); 
+}; 
 
 export default AnimatedProjectRoutes;

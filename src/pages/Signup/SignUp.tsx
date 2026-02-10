@@ -23,7 +23,6 @@ const SignUp = () => {
     formState: { errors, isSubmitting },
     reset
   } = useForm<SignUpFormValues>();
-  // reset
 
   const { signUpMutation, isPending } = useSignup();
 

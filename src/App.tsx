@@ -6,21 +6,21 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Project from './pages/Project/Project'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 import MyTask from './pages/MyTask/MyTask'
-import ProjectDetail from './pages/Project/pages/ProjectDetail/ProjectDetail'
+import ProjectDetail from './features/project/pages/ProjectDetail'
 // import Overview from './pages/Project/pages/ProjectDetail/Overview/Overview'
 // import Task from './pages/Project/pages/ProjectDetail/Task/Task'
 // import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachment'
 // import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
 import SignUp from './pages/Signup/SignUp'
-import Overview from './pages/Project/pages/ProjectDetail/Overview/Overview'
-import Attachment from './pages/Project/pages/ProjectDetail/Attachment/Attachment'
-import Setting from './pages/Project/pages/ProjectDetail/Setting/Setting'
+import Overview from './features/project/pages/Overview'
+import Attachment from './features/project/pages/Attachment'
+import Setting from './features/project/pages/Setting'
 import { Toaster } from './components/ui/toaster'
 import { ProtectedRoutes } from './context/auth/ProtectedRoutes'
 import WorkspaceMember from './pages/WorkspaceMember/WorkspaceMember'
 import WorkspaceSetting from './pages/WorkspaceSetting/WorkspaceSetting'
 
-function App() {
+function App() { 
 
   return (
     <>
@@ -42,12 +42,12 @@ function App() {
               <Route path="task" element={<MyTask /> } />
               <Route path="attachment" element={<Attachment />} />
               <Route path="setting" element={<Setting /> } />
-            </Route>
+            </Route> 
               <Route path="/workspace-member" element={<WorkspaceMember />} />
               <Route path="/workspace-setting" element={<WorkspaceSetting />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
-
+ 
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
         </Routes>

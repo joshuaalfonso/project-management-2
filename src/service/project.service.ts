@@ -1,6 +1,6 @@
 import { api } from "@/lib/axios";
 import type { ApiResponse } from "@/model/apiResponse.model";
-import type { CreateEditProject, ProjectList } from "@/pages/Project/project.model";
+import type { CreateEditProject, ProjectList } from "@/features/project/project.model";
 
 
 

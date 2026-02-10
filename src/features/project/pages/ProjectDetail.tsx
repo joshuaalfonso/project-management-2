@@ -40,7 +40,7 @@ const ProjectDetail = () => {
         
             <div className="mb-6!">
                 <Heading 
-                    size={'2xl'}
+                    size={'2xl'} 
                 >
                     TaskFlow
                 </Heading>

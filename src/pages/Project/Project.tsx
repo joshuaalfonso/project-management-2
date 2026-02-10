@@ -1,9 +1,9 @@
-import {  Box, Heading, Text } from "@chakra-ui/react"
+import {  Heading } from "@chakra-ui/react"
 // import { BiCheck } from "react-icons/bi"
-import { Link } from "react-router-dom"
-import ProjectDialog from "./components/ProjectDialog"
-import { ProjectDialogProvider } from "./hooks/useProjectDialog"
-import { useProject } from "./hooks/useProject"
+import ProjectDialog from "../../features/project/components/ProjectDialog"
+import { ProjectDialogProvider } from "../../features/project/hooks/useProjectDialog"
+import { useProject } from "../../features/project/hooks/useProject"
+import ProjectCardList from "../../features/project/components/ProjectCardList"
 
 
 
@@ -56,9 +56,12 @@ const Project = () => {
         </div>
 
 
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+        <ProjectCardList projects={projects || []} />
 
-          {projects?.map((item) => (
+
+        {/* <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4"> */}
+
+          {/* {projects?.map((item) => (
             <Box
               key={item.project_id}
               borderWidth="1px"
@@ -66,7 +69,7 @@ const Project = () => {
               rounded={'md'}
               px={'6'}
               py={'4'}
-              _hover={{boxShadow: 'sm'}}
+              _hover={{boxShadow: 'sm'}} 
               className="space-y-3!"
             >
               
@@ -85,9 +88,9 @@ const Project = () => {
               </div>
 
             </Box>
-          ))}
+          ))} */}
 
-          {/* <Box
+          {/* <Box 
             borderWidth="1px"
             borderColor="border.disabled"
             rounded={'md'}
@@ -151,7 +154,10 @@ const Project = () => {
           </Box> */}
 
 
-        </div>
+        {/* </div> */}
+
+        
+
       </ProjectDialogProvider>
     </>
   )
