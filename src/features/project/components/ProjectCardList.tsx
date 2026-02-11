@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 import type { ProjectList } from "../project.model"
 import { Link } from "react-router-dom"
 
@@ -30,9 +30,9 @@ const ProjectCardList = ( {projects}: {projects: ProjectList[]} ) => {
                         </Link>
                         </Heading>
 
-                        <Text fontSize={'sm'} color={'fg.muted'}>
+                        {/* <Text fontSize={'sm'} color={'fg.muted'}>
                         { item.project_description }
-                        </Text>
+                        </Text> */}
                     </div>
 
                 </Box>

@@ -19,3 +19,7 @@ export interface CreateEditProject {
   project_description: string
   workspace_id: number
 }
+
+export interface ProjectDescription {
+  project_description: string
+}

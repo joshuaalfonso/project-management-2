@@ -1,5 +1,5 @@
 import { useWorkSpace } from "@/context/workspace/useWorkspace";
-import { createProject } from "@/service/project.service"
+import { createProject } from "@/service/project.api"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 

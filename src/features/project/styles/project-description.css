@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+
+.project-description h1{
+    @apply text-[2em]
+}
+.project-description h2 {
+    @apply text-[1.5rem]
+}
+.project-description h3 {
+    @apply text-[1.17em]
+}
+.project-description h4 {
+    @apply text-[1em]
+}
+
+/* .project-description p {
+    @apply opacity-60
+} */
+
+.project-description ul {
+    @apply list-disc list-outside!
+}
+
+/* .project-description ul li {
+    @apply block
+} */

@@ -64,6 +64,12 @@ function TiptapEditor({ value, onChange }: TiptapEditorProps) {
           </RichTextEditor.ControlGroup>
 
           <RichTextEditor.ControlGroup>
+            <Control.BulletList />
+            <Control.OrderedList />
+            <Control.Blockquote />
+          </RichTextEditor.ControlGroup>
+
+          <RichTextEditor.ControlGroup>
             <Control.H1 />
             <Control.H2 />
             <Control.H3 />

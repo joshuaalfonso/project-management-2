@@ -1,5 +1,5 @@
 import { useWorkSpace } from "@/context/workspace/useWorkspace"
-import { getProjectByWorkspace } from "@/service/project.service"
+import { getProjectByWorkspace } from "@/service/project.api"
 import { useQuery } from "@tanstack/react-query"
 
 
