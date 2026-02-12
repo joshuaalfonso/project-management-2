@@ -19,8 +19,13 @@
 } */
 
 .project-description ul {
-    @apply list-disc list-outside!
+    @apply list-disc list-inside!
 }
+
+.project-description li p {
+  display: inline;
+}
+
 
 /* .project-description ul li {
     @apply block

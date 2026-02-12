@@ -2,6 +2,7 @@
 import { useProjectDescription } from "../hooks/useProjectDescription";
 import DOMPurify from 'dompurify';
 import '../styles/project-description.css';
+import { Box, Field, Heading, Separator, Text } from "@chakra-ui/react";
 
 
 const Overview = () => {
@@ -14,12 +15,92 @@ const Overview = () => {
 
     const cleanHTML = DOMPurify.sanitize(projectDescription?.project_description || '-');
 
+    
+
     return (
         <>
 
-            <div className="project-description space-y-3!"
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-4">
+
+            <Box 
+                className="project-description space-y-3!"
                 dangerouslySetInnerHTML={{ __html: cleanHTML }}
+                css={{
+                    "& p": {
+                        color: "var(--chakra-colors-fg-muted)",
+                    },
+                }}
             />
+
+            <Box 
+               className="space-y-8!"
+            >
+
+                <div>
+                    <Heading
+                        mb={'5'}
+                    >
+                        Client Information
+                    </Heading>
+
+                    <div className="space-y-5!">
+                        <Field.Root invalid>
+                            <Field.Label>Client:</Field.Label>
+                            <Text 
+                                color={'fg.muted'}
+                            >
+                                Joshua Alfonso
+                            </Text>
+                        </Field.Root>
+                        <Field.Root invalid>
+                            <Field.Label>Stakeholder:</Field.Label>
+                            <Text 
+                                color={'fg.muted'}
+                            >
+                                Joshua Alfonso
+                            </Text>
+                        </Field.Root>
+                    </div>
+                </div>
+
+                <Separator />
+
+                <div>
+                    <Heading
+                        mb={'5'}
+                    >
+                        Schedule
+                    </Heading>
+
+                    <div className="space-y-5!">
+                        <Field.Root invalid>
+                            <Field.Label>Start Date:</Field.Label>
+                            <Text 
+                                color={'fg.muted'}
+                            >
+                                Sat, 09 Mar 2024
+                            </Text>
+                        </Field.Root>
+                        <Field.Root invalid>
+                            <Field.Label>Due date:</Field.Label>
+                            <Text 
+                                color={'fg.muted'}
+                            >
+                                Joshua Alfonso
+                            </Text>
+                        </Field.Root>
+                        <Field.Root invalid>
+                            <Field.Label>Status:</Field.Label>
+                            <Text 
+                                color={'fg.muted'}
+                            >
+                                In Progress
+                            </Text>
+                        </Field.Root>
+                    </div>
+                </div>
+            </Box>
+        </div>
 
             {/* <div 
                 className="grid grid-cols-1 xl:grid-cols-3 gap-5"

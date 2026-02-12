@@ -146,9 +146,6 @@ const ProjectDialog = () => {
                                         </div>
                                     </Field.Root>
 
-
-                                     {/* <TextEditor /> */}
-
                                 
                                 </Fieldset.Content> 
 

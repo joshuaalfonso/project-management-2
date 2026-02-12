@@ -1,8 +1,8 @@
 import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
-import {  Heading, Tabs, Text } from "@chakra-ui/react"
+import { Heading, Tabs, Text } from "@chakra-ui/react"
 // import { AnimatePresence } from "framer-motion";
 import { BiCalendar, BiCheck, BiGroup } from "react-icons/bi";
-import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
+import {LuFile, LuList, LuListChecks, LuMoveLeft, LuSettings } from "react-icons/lu";
 // import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
 import {  useLocation, useNavigate, useParams } from "react-router-dom";
 // import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
@@ -39,11 +39,20 @@ const ProjectDetail = () => {
             
         
             <div className="mb-6!">
-                <Heading 
-                    size={'2xl'} 
-                >
-                    TaskFlow
-                </Heading>
+                <div className="flex items-center gap-3">
+                    
+                    <button
+                        className="cursor-pointer hover:-translate-x-1 transition-all duration-300 ease-in-out"
+                        onClick={() => navigate('/project')}
+                    >
+                        <LuMoveLeft size={'22'} />
+                    </button>
+                    <Heading 
+                        size={'2xl'} 
+                    >
+                        TaskFlow
+                    </Heading>
+                </div>
                 <div className="flex flex-wrap gap-3 mt-2!">
                     <Text 
                         fontSize={'sm'} 
