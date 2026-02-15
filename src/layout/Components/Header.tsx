@@ -13,7 +13,8 @@ const Header = () => {
             <Box
                 borderBottomWidth="1px"
                 borderRightColor={'border'}
-                className="sticky w-full h-12.5! flex justify-between items-center px-8! md:px-12! xl:px-16! py-6!"
+                backgroundColor={'bg.subtle'}
+                className="sticky! top-0! w-full h-12.5! flex justify-between items-center px-8! md:px-12! xl:px-16! py-6! z-10!"
             >
                 <h1></h1>
                 <div className="flex items-center gap-2">

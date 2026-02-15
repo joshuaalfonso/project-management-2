@@ -1,22 +1,23 @@
 // import { Box, Heading, Text } from "@chakra-ui/react"
-import { useProjectDescription } from "../hooks/useProjectDescription";
 import DOMPurify from 'dompurify';
 import '../styles/project-description.css';
 import { Box, Field, Heading, Separator, Text } from "@chakra-ui/react";
+import { useProjectDetail } from "../hooks/useProjectDetail";
 
 
 const Overview = () => {
 
-    const { projectDescription, isPending, error } = useProjectDescription();
+    // const { projectDescription, isPending, error } = useProjectDescription();
+
+    const { project, isPending, error } = useProjectDetail();
 
     if (isPending) return <p>Loading...</p>;
 
     if (error) return <p>Failed to load description</p>;
 
-    const cleanHTML = DOMPurify.sanitize(projectDescription?.project_description || '-');
+    const cleanHTML = DOMPurify.sanitize(project?.project_description || '-');
 
     
-
     return (
         <>
 

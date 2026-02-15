@@ -1,7 +1,12 @@
 
 const WorkspaceSetting = () => {
   return (
-    <div>WorkspaceSetting</div>
+    <>
+      <div>WorkspaceSetting</div>
+      <div className="h-600">
+        overflow
+      </div>
+    </>
   )
 }
 

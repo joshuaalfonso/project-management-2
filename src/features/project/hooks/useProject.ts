@@ -14,7 +14,9 @@ export const useProject = () => {
     const { data: projects, isPending, error } = useQuery({
         queryKey: ['projects', workspace_id],
         queryFn: () => getProjectByWorkspace({workspace_id: workspace_id!}),
-        enabled: !!workspace_id
+        enabled: !!workspace_id,
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 30,
     })
 
 

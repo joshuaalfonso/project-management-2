@@ -5,9 +5,12 @@ import { BiCalendar, BiCheck, BiGroup } from "react-icons/bi";
 import {LuFile, LuList, LuListChecks, LuMoveLeft, LuSettings } from "react-icons/lu";
 // import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
 import {  useLocation, useNavigate, useParams } from "react-router-dom";
+import { useProjectDetail } from "../hooks/useProjectDetail";
 // import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
 
 const ProjectDetail = () => {
+
+    const { project, isPending, error } = useProjectDetail();
 
     const { project_id } = useParams();
     const navigate = useNavigate();
@@ -15,8 +18,8 @@ const ProjectDetail = () => {
 
     const currentTab = location.pathname.split("/").pop() ?? "overview";
 
-    console.log(project_id)
-    console.log(currentTab)
+    // console.log(project_id)
+    // console.log(currentTab)
 
     // const tabs = [
     //     { value: "overview", label: "Overview" },
@@ -32,6 +35,9 @@ const ProjectDetail = () => {
     // enter: { opacity: 1, y: 0 },
     // exit: { opacity: 0, y: -50 },
     // };
+
+    if (isPending) return <p>Loading ...</p>;
+    if (error) return <p> Failed to load detail.</p>;
 
 
     return (
@@ -50,7 +56,7 @@ const ProjectDetail = () => {
                     <Heading 
                         size={'2xl'} 
                     >
-                        TaskFlow
+                        { project?.project_name || '-' }
                     </Heading>
                 </div>
                 <div className="flex flex-wrap gap-3 mt-2!">

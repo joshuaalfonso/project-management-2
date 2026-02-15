@@ -30,8 +30,6 @@ const Project = () => {
   if (isPending) return <p>Loading..</p>;
   if (error) return <p>Failed to load project</p>;
 
-  console.log(projects)
-  
   return (
     <>
       

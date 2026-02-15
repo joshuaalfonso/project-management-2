@@ -12,9 +12,11 @@ export const useProjectDescription = () => {
     const { project_id } = useParams();
 
     const { data: projectDescription, isPending, error } = useQuery({
-        queryKey: ['project_id', project_id],
+        queryKey: ['project_description', project_id],
         queryFn: () => getProjectDescription({project_id: +project_id!}),
-        enabled: !!project_id
+        enabled: !!project_id,
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 30,
     })
 
 
