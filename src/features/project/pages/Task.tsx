@@ -1,7 +1,12 @@
+import { useTaskStatus } from "@/features/task-status/hooks/useTaskStatus";
 import { Avatar, Badge, Heading, Table, Text } from "@chakra-ui/react"
 import { FiClock } from "react-icons/fi"
 
 const Task = () => {
+
+  const { taskStatus } = useTaskStatus();
+
+  console.log(taskStatus)
 
   const todo = [
     { id: 1, name: "Table data incorrect", category: "Bug", price: 999.99 },

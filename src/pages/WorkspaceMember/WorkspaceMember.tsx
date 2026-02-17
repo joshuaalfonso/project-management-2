@@ -1,7 +1,16 @@
 import { WorkspaceRoles } from "@/features/WorkspaceMember/components/WorkspaceRoles";
 import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspaceMember"
 import { Avatar, createListCollection, Heading, Input, Portal, Select, Separator, Text } from "@chakra-ui/react";
-import { Clipboard, IconButton } from "@chakra-ui/react"
+import { Clipboard, IconButton } from "@chakra-ui/react";
+
+const workspaceRole = createListCollection({
+  items: [
+    { label: "Owner", value: '1' },
+    { label: "Admin", value: '2' },
+    { label: "Member", value: '3'},
+    { label: "Viewer", value: '4' },
+  ],
+})
 
 const WorkspaceMember = () => {
 
@@ -11,17 +20,6 @@ const WorkspaceMember = () => {
   if (isPending) return <p>Loading...</p>;
   if (error) return <p> Failed to load workspace members</p>;
 
-
-  const workspaceRole = createListCollection({
-    items: [
-      { label: "Owner", value: '1' },
-      { label: "Admin", value: '2' },
-      { label: "Member", value: '3'},
-      { label: "Viewer", value: '4' },
-    ],
-  })
- 
-  
 
   return (
     <>
@@ -117,7 +115,6 @@ const WorkspaceMember = () => {
                       <Text fontSize={'xs'} color={'fg.muted'}>{ member.user_email }</Text>
                   </div>
                   <div className="flex-1! flex items-center justify-end">
-                      {/* { member.workspace_role } */}
                       <Select.Root 
                         collection={workspaceRole} 
                         size="sm" 
@@ -126,7 +123,6 @@ const WorkspaceMember = () => {
                         disabled={member.workspace_role == 'Owner'}
                       >
                         <Select.HiddenSelect />
-                        {/* <Select.Label>Select framework</Select.Label> */}
                         <Select.Control>
                           <Select.Trigger>
                             <Select.ValueText placeholder="Select Role" />

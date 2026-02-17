@@ -8,7 +8,6 @@ import { useProjectDetail } from "../hooks/useProjectDetail";
 const Overview = () => {
 
     // const { projectDescription, isPending, error } = useProjectDescription();
-
     const { project, isPending, error } = useProjectDetail();
 
     if (isPending) return <p>Loading...</p>;
