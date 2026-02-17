@@ -1,5 +1,6 @@
 import { WorkspaceRoles } from "@/features/WorkspaceMember/components/WorkspaceRoles";
 import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspaceMember"
+import LoadingSpinner from "@/shared/components/LoadingSpinner";
 import { Avatar, createListCollection, Heading, Input, Portal, Select, Separator, Text } from "@chakra-ui/react";
 import { Clipboard, IconButton } from "@chakra-ui/react";
 
@@ -17,9 +18,8 @@ const WorkspaceMember = () => {
   const { workspace_members, isPending, error } = useWorkspaceMember();
 
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <LoadingSpinner />;
   if (error) return <p> Failed to load workspace members</p>;
-
 
   return (
     <>

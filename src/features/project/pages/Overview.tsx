@@ -16,6 +16,8 @@ const Overview = () => {
 
     const cleanHTML = DOMPurify.sanitize(project?.project_description || '-');
 
+    console.log('overview')
+
     
     return (
         <>

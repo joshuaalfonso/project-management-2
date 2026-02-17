@@ -6,6 +6,7 @@ import {LuFile, LuList, LuListChecks, LuMoveLeft, LuSettings } from "react-icons
 // import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
 import {  useLocation, useNavigate, useParams } from "react-router-dom";
 import { useProjectDetail } from "../hooks/useProjectDetail";
+import { ProjectTaskDialogProvider } from "../hooks/useProjectTaskDialog";
 // import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
 
 const ProjectDetail = () => {
@@ -116,7 +117,9 @@ const ProjectDetail = () => {
                     </Tabs.Trigger>
                 </Tabs.List>
 
-                <AnimatedProjectRoutes />
+                <ProjectTaskDialogProvider>
+                    <AnimatedProjectRoutes />
+                </ProjectTaskDialogProvider>
 
                 {/* <Outlet /> */}
 
