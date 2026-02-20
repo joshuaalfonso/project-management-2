@@ -17,6 +17,7 @@ export interface ProjectTask {
   end_date: string
   completed_at: string | null
   created_at: string
+  assignees: {user_id: number, user_fullname: string}[]
 }
 
 
@@ -27,4 +28,5 @@ export interface CreateProjectTask {
     task_priority_id: number
     start_date: string
     end_date: string
+    assignees: string[]
 }

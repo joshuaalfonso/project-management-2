@@ -2,7 +2,7 @@
 // import { Avatar, Badge, Heading, Table, Text } from "@chakra-ui/react"
 // import { FiClock } from "react-icons/fi"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog";
-import { Badge, Button, Table, Text } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Badge, Button, Table, Text } from "@chakra-ui/react";
 import ProjectTaskDialog from "../components/ProjectTaskDialog";
 import { useProjectTask } from "../hooks/useProjectTask";
 import LoadingSpinner from "@/shared/components/LoadingSpinner";
@@ -12,13 +12,19 @@ const Task = () => {
 
   const { setOpen } = useProjectTaskDialog();
 
-
   const { projectTasks, isPending, error } = useProjectTask(); 
 
   if (isPending) return <LoadingSpinner />;
   if (error) return <p>Failed to load project tasks</p>;
 
-  console.log(projectTasks)
+  console.log('project task list')
+
+  const colorPalette = ["red", "blue", "green", "yellow", "purple", "orange"]
+
+  const pickPalette = (name: string) => {
+    const index = name.charCodeAt(0) % colorPalette.length
+    return colorPalette[index]
+  }
 
   return (
     <> 
@@ -50,15 +56,27 @@ const Task = () => {
                     <Table.Cell>
                       <div className="flex items-center gap-2">
                         <FiClock /> 
-                        <Text fontSize={'sm'} color={'fg.muted'}>{new Date(item.start_date).toLocaleDateString()}</Text>
+                        <Text fontSize={'sm'} color={'fg.muted'}>{new Date(item.end_date).toLocaleDateString()}</Text>
                       </div>
                     </Table.Cell>
-                    {/* <Table.Cell textAlign="end">
-                      <Avatar.Root size={'xs'}>
-                        <Avatar.Fallback name="Segun Adebayo" />
-                        <Avatar.Image src="https://bit.ly/sage-adebayo" />
-                      </Avatar.Root>
-                    </Table.Cell> */}
+                     <Table.Cell>
+                      <div className="flex items-center gap-1">
+                        <AvatarGroup size="lg" stacking="last-on-top">
+
+                          {item.assignees.map((assignee) => (
+                            <Avatar.Root 
+                              key={assignee.user_id} 
+                              size="sm" 
+                              shape="full" 
+                              borderColor={'bg.subtle'}
+                              colorPalette={pickPalette(assignee.user_fullname)}
+                            >
+                              <Avatar.Fallback name={assignee.user_fullname} />
+                            </Avatar.Root>
+                          ))}
+                        </AvatarGroup>
+                      </div>
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

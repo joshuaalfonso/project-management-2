@@ -1,4 +1,4 @@
-import { Button, CloseButton, createListCollection, Dialog, Field, Fieldset, Input, Portal, Select, Stack, Text, Textarea } from "@chakra-ui/react"
+import { Avatar, Button, CloseButton, createListCollection, Dialog, Field, Fieldset, Input, Portal, Select, Span, Stack, Text, Textarea } from "@chakra-ui/react"
 // import { FiPlus } from "react-icons/fi"
 import { useForm, type SubmitHandler } from "react-hook-form"
 // import { toaster } from "@/components/ui/toaster"
@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom"
 import { useCreateProjectTask } from "../hooks/useCreateProjectTask"
 import { toaster } from "@/components/ui/toaster"
 import { getErrorMessage } from "@/lib/axios"
+import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspaceMember"
 // import { TextEditor } from "@/shared/components/TextEditor"
 
 
@@ -20,14 +21,21 @@ interface TaskFormvalues {
   task_priority_id: number
   start_date: string,
   end_date: string,
+  assignees: string[]
 }
+
 
 const ProjectTaskDialog = () => {
 
 
-    const { open, setOpen } = useProjectTaskDialog();
+    const { 
+        open, 
+        setOpen 
+    } = useProjectTaskDialog();
 
     const { taskPriority } = useTaskPriority();
+
+    const { workspace_members } = useWorkspaceMember();
 
     const priorityCollection = createListCollection({
         items: taskPriority ?? [],
@@ -35,13 +43,21 @@ const ProjectTaskDialog = () => {
         itemToValue: (item) => String(item.task_priority_id),
     })
 
+    const workspaceMembers = createListCollection({
+        items: workspace_members?.workspace_members ?? [],
+        itemToString: (item) => item.user_fullname,
+        itemToValue: (item) => String(item.user_id),
+    })
+
     const { project_id } = useParams();
     const project_id_number = Number(project_id);
 
     console.log('task dialog');
-    console.log(project_id);
 
-    const { createProjectTaskMutation, isCreating } = useCreateProjectTask();
+    const { 
+        createProjectTaskMutation, 
+        isCreating 
+    } = useCreateProjectTask();
 
     const {
         register,
@@ -49,7 +65,11 @@ const ProjectTaskDialog = () => {
         formState: { errors, isSubmitting },
         reset,
         control
-    } = useForm<TaskFormvalues>();
+    } = useForm<TaskFormvalues>({
+        defaultValues: {
+            assignees: []
+        }
+    });
 
     const onSubmit: SubmitHandler<TaskFormvalues> = (data) => {
 
@@ -153,99 +173,64 @@ const ProjectTaskDialog = () => {
                                         )}
                                     </Field.Root>
 
-                                    {/* <Field.Root>
-                                        <Field.Label>Priority</Field.Label>
-                                        <Select.Root collection={priorityCollection} size="md" width="full">
-                                            <Select.HiddenSelect />
-                                            <Select.Control>
-                                                <Select.Trigger>
-                                                    <Select.ValueText placeholder="Select priority" className="capitalize" />
-                                                </Select.Trigger>
-                                                <Select.IndicatorGroup>
-                                                <Select.Indicator />
-                                                </Select.IndicatorGroup>
-                                            </Select.Control>
-                                            <Portal>
-                                                <Select.Positioner>
-                                                <Select.Content>
-                                                    {priorityCollection.items.map((framework) => (
-                                                        <Select.Item 
-                                                            item={framework} 
-                                                            key={framework.task_priority_id} 
-                                                            className="capitalize"
-                                                        >
-                                                            {framework.task_priority_name}
-                                                            <Select.ItemIndicator />
-                                                        </Select.Item>
-                                                    ))}
-                                                </Select.Content>
-                                                </Select.Positioner>
-                                            </Portal>
-                                        </Select.Root>
-                                        {errors.description && (
-                                            <Text color="fg.error" fontSize="sm">
-                                                {errors.description.message}
-                                            </Text>
-                                        )}
-                                    </Field.Root> */}
 
                                     <Field.Root>
-                                    <Field.Label>Priority</Field.Label>
+                                        <Field.Label>Priority</Field.Label>
 
-                                    <Controller
-                                        name="task_priority_id"
-                                        control={control}
-                                        rules={{ required: "Priority is required" }}
-                                        render={({ field }) => (
-                                        <Select.Root
-                                            collection={priorityCollection}
-                                            value={field.value ? [String(field.value)] : []}
-                                            onValueChange={(details) => {
-                                                const selectedValue = details.value[0] // string
-                                                field.onChange(Number(selectedValue))  // convert to number
-                                            }}
-                                            size="md"
-                                            width="full"
-                                        >
-                                            <Select.HiddenSelect />
-                                            <Select.Control>
-                                            <Select.Trigger>
-                                                <Select.ValueText
-                                                    placeholder="Select priority"
-                                                    className="capitalize"
-                                                />
-                                            </Select.Trigger>
-                                            <Select.IndicatorGroup>
-                                                <Select.Indicator />
-                                            </Select.IndicatorGroup>
-                                            </Select.Control>
+                                        <Controller
+                                            name="task_priority_id"
+                                            control={control}
+                                            rules={{ required: "Priority is required" }}
+                                            render={({ field }) => (
+                                            <Select.Root
+                                                collection={priorityCollection}
+                                                value={field.value ? [String(field.value)] : []}
+                                                onValueChange={(details) => {
+                                                    const selectedValue = details.value[0] // string
+                                                    field.onChange(Number(selectedValue))  // convert to number
+                                                }}
+                                                size="md"
+                                                width="full"
+                                            >
+                                                <Select.HiddenSelect />
+                                                <Select.Control>
+                                                <Select.Trigger>
+                                                    <Select.ValueText
+                                                        placeholder="Select priority"
+                                                        className="capitalize"
+                                                    />
+                                                </Select.Trigger>
+                                                <Select.IndicatorGroup>
+                                                    <Select.Indicator />
+                                                </Select.IndicatorGroup>
+                                                </Select.Control>
 
-                                            <Portal>
-                                            <Select.Positioner>
-                                                <Select.Content>
-                                                {priorityCollection.items.map((item) => (
-                                                    <Select.Item
-                                                    key={item.task_priority_id}
-                                                    item={item}
-                                                       // IMPORTANT
-                                                    className="capitalize"
-                                                    >
-                                                    {item.task_priority_name}
-                                                    <Select.ItemIndicator />
-                                                    </Select.Item>
-                                                ))}
-                                                </Select.Content>
-                                            </Select.Positioner>
-                                            </Portal>
-                                        </Select.Root>
+                                                <Portal>
+                                                <Select.Positioner>
+                                                    <Select.Content>
+                                                    {priorityCollection.items.map((item) => (
+                                                        <Select.Item
+                                                        key={item.task_priority_id}
+                                                        item={item}
+                                                        // IMPORTANT
+                                                        className="capitalize"
+                                                        >
+                                                        {item.task_priority_name}
+                                                        <Select.ItemIndicator />
+                                                        </Select.Item>
+                                                    ))}
+                                                    </Select.Content>
+                                                </Select.Positioner>
+                                                </Portal>
+                                            </Select.Root>
+                                            )}
+                                        />
+
+                                        {errors.task_priority_id && (
+                                            <Text color="fg.error" fontSize="sm">
+                                            {errors.task_priority_id.message}
+                                            </Text>
                                         )}
-                                    />
-
-                                    {errors.task_priority_id && (
-                                        <Text color="fg.error" fontSize="sm">
-                                        {errors.task_priority_id.message}
-                                        </Text>
-                                    )}
                                     </Field.Root>
 
                                     <Field.Root>
@@ -277,6 +262,76 @@ const ProjectTaskDialog = () => {
                                             </Text>
                                         )}
                                     </Field.Root>
+
+                                    <Controller
+                                        name="assignees"
+                                        control={control}
+                                        rules={{
+                                            validate: (value) =>
+                                            value && value.length > 0 ? true : "Please select at least one assignee",
+                                        }}
+                                        render={({ field }) => (
+                                            <Field.Root>
+                                            <Field.Label>Assignees</Field.Label>
+
+                                            <Select.Root
+                                                multiple
+                                                collection={workspaceMembers}
+                                                size="sm"
+                                                width="full"
+                                                value={field.value ?? []}
+                                                onValueChange={(details) => field.onChange(details.value)}
+                                            >
+                                                <Select.HiddenSelect />
+                                                <Select.Control>
+                                                <Select.Trigger>
+                                                    <Select.ValueText placeholder="Select assignees" />
+                                                </Select.Trigger>
+                                                <Select.IndicatorGroup>
+                                                    <Select.Indicator />
+                                                </Select.IndicatorGroup>
+                                                </Select.Control>
+
+                                                <Portal>
+                                                <Select.Positioner>
+                                                    <Select.Content>
+                                                    {workspaceMembers.items.map((member) => (
+                                                        <Select.Item
+                                                        item={member}
+                                                        key={member.user_id}
+                                                        >
+                                                        <div className="flex gap-2 items-center">
+                                                            <Avatar.Root shape="rounded" size="xs" colorPalette="blue">
+                                                            <Avatar.Image src={''} alt={member.user_fullname} />
+                                                            <Avatar.Fallback name={member.user_fullname} />
+                                                            </Avatar.Root>
+
+                                                            <Stack gap="0">
+                                                            <Select.ItemText textTransform="capitalize">
+                                                                {member.user_fullname}
+                                                            </Select.ItemText>
+                                                            <Span color="fg.muted" textStyle="xs">
+                                                                {member.workspace_role}
+                                                            </Span>
+                                                            </Stack>
+                                                        </div>
+
+                                                        <Select.ItemIndicator />
+                                                        </Select.Item>
+                                                    ))}
+                                                    </Select.Content>
+                                                </Select.Positioner>
+                                                </Portal>
+                                            </Select.Root>
+
+                                            {errors.assignees && (
+                                            <Text color="fg.error" fontSize="sm">
+                                                {errors.assignees.message}
+                                            </Text>
+                                        )}
+                                            </Field.Root>
+                                        )}
+                                    />
 
                                 
                                 </Fieldset.Content> 
