@@ -1,12 +1,12 @@
-import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
+import AnimatedProjectRoutes from "@/features/project/project-detail/AnimatedProjectRoutes";
 import { Heading, Tabs, Text } from "@chakra-ui/react"
 // import { AnimatePresence } from "framer-motion";
 import { BiCalendar, BiCheck, BiGroup } from "react-icons/bi";
 import {LuFile, LuList, LuListChecks, LuMoveLeft, LuSettings } from "react-icons/lu";
 // import { LuFile, LuList, LuListChecks, LuSettings } from "react-icons/lu";
 import {  useLocation, useNavigate, useParams } from "react-router-dom";
-import { useProjectDetail } from "../hooks/useProjectDetail";
-import { ProjectTaskDialogProvider } from "../hooks/useProjectTaskDialog";
+import { useProjectDetail } from "../../features/project/project-detail/hooks/useProjectDetail";
+import { ProjectTaskDialogProvider } from "../../features/project/project-detail/sections/task/hooks/useProjectTaskDialog";
 // import AnimatedProjectRoutes from "@/shared/components/AnimatedProjectRoutes";
 
 const ProjectDetail = () => {

@@ -1,9 +1,9 @@
 import {  Heading } from "@chakra-ui/react"
 // import { BiCheck } from "react-icons/bi"
-import ProjectDialog from "../../features/project/components/ProjectDialog"
-import { ProjectDialogProvider } from "../../features/project/hooks/useProjectDialog"
-import { useProject } from "../../features/project/hooks/useProject"
-import ProjectCardList from "../../features/project/components/ProjectCardList"
+import { ProjectDialogProvider } from "../../features/project/project-list/hooks/useProjectDialog"
+import { useProject } from "@/features/project/project-list/hooks/useProject"
+import ProjectDialog from "@/features/project/project-list/components/ProjectDialog";
+import ProjectCardList from "@/features/project/project-list/components/ProjectCardList";
 
 
 
@@ -27,7 +27,7 @@ const Project = () => {
 
   const { projects, isPending, error } = useProject();
 
-  if (isPending) return <p>Loading..</p>;
+  if (isPending) return <p>Loading..</p>; 
   if (error) return <p>Failed to load project</p>;
 
   return (

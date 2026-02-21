@@ -1,10 +1,10 @@
-import Attachment from "@/features/project/pages/Attachment";
-import Overview from "@/features/project/pages/Overview";
-import Setting from "@/features/project/pages/Setting";
-import Task from "@/features/project/pages/Task";
 import { AnimatePresence } from "framer-motion";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import PageTransition from "./PageTransition";
+import PageTransition from "../../../shared/components/PageTransition";
+import Overview from "./sections/overview/Overview";
+import Task from "./sections/task/Task";
+import Attachment from "./sections/attachment/Attachment";
+import Setting from "./sections/setting/Setting";
 
 const AnimatedProjectRoutes = () => {
   const location = useLocation();
@@ -20,6 +20,6 @@ const AnimatedProjectRoutes = () => {
       </Routes>
     </AnimatePresence>
   ); 
-}; 
+};  
 
 export default AnimatedProjectRoutes;

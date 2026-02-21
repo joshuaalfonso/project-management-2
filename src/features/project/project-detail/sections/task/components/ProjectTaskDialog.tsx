@@ -163,7 +163,13 @@ const ProjectTaskDialog = () => {
                                     <Field.Root>
                                         <Field.Label>Description</Field.Label>
                                         <Textarea
-                                            {...register("description", { required: "Description is required" })}
+                                            {...register("description", { 
+                                                required: "Description is required",  
+                                                minLength: { 
+                                                    value: 8, 
+                                                    message: "Should at least 8 characters" 
+                                                }, 
+                                            })}
                                             tabIndex={-1}
                                         />
                                         {errors.description && (

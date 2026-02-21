@@ -48,16 +48,16 @@ function TiptapEditor({ value, onChange }: TiptapEditorProps) {
     <Box border="0px solid" borderColor="gray.200" p={0} borderRadius="md">
       <RichTextEditor.Root editor={editor}>
         <RichTextEditor.Toolbar>
-          <RichTextEditor.ControlGroup>
+          {/* <RichTextEditor.ControlGroup>
             <Control.FontFamily />
             <Control.FontSize />
-          </RichTextEditor.ControlGroup>
+          </RichTextEditor.ControlGroup> */}
 
           <RichTextEditor.ControlGroup>
             <Control.Bold />
             <Control.Italic />
             <Control.Underline />
-            <Control.Strikethrough />
+            {/* <Control.Strikethrough /> */}
             <Control.Code />
             {/* <Control.Subscript />
             <Control.Superscript /> */}
@@ -66,7 +66,7 @@ function TiptapEditor({ value, onChange }: TiptapEditorProps) {
           <RichTextEditor.ControlGroup>
             <Control.BulletList />
             <Control.OrderedList />
-            <Control.Blockquote />
+            {/* <Control.Blockquote /> */}
           </RichTextEditor.ControlGroup>
 
           <RichTextEditor.ControlGroup>

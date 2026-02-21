@@ -10,7 +10,7 @@ export interface ProjectTask {
   project_id: number
   project_name: string
   task_status_id: number
-  task_status_name: string
+  task_status_name: 'todo' | 'in progress' | 'review' | 'done'
   task_priority_id: number
   task_priority_name: string
   start_date: string

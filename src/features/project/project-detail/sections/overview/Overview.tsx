@@ -1,8 +1,9 @@
 // import { Box, Heading, Text } from "@chakra-ui/react"
 import DOMPurify from 'dompurify';
-import '../styles/project-description.css';
+import '../../styles/project-description.css';
+// import '../styles/project-description.css';
 import { Box, Field, Heading, Separator, Text } from "@chakra-ui/react";
-import { useProjectDetail } from "../hooks/useProjectDetail";
+import { useProjectDetail } from "../../hooks/useProjectDetail";
 
 
 const Overview = () => {
