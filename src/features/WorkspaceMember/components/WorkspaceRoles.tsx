@@ -15,7 +15,7 @@ export const WorkspaceRoles = () => {
                     Workspace roles
                 </Heading>
 
-                <Tabs.Root defaultValue="1" variant={'subtle'}>
+                <Tabs.Root defaultValue="1" variant={'subtle'} size={'sm'}>
                     <Tabs.List>
                         <Tabs.Trigger value="1">
                         Owner

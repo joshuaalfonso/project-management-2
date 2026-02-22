@@ -1,3 +1,4 @@
+import { EmptyList } from "@/shared/components/EmptyState";
 import { useProjectTask } from "../hooks/useProjectTask";
 import { ProjectTaskTable } from "./ProjectTaskTable";
 
@@ -10,13 +11,13 @@ export const ProjectTaskTableView = () => {
     if (isPending) return <p>loading...</p>;
     if (error) return <p>Failed to load task</p>;
 
-    return (
+    console.log('task table')
 
-        <>
-            <ProjectTaskTable projectTasks={projectTasks ?? []} />
-        </>
+    if (projectTasks?.length === 0) {
+        return <EmptyList />
+    }
 
-    )
+    return <ProjectTaskTable projectTasks={projectTasks ?? []} />;
 
 
 }
