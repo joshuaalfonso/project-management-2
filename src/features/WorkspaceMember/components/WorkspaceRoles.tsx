@@ -27,7 +27,7 @@ export const WorkspaceRoles = () => {
                         Member
                         </Tabs.Trigger>
                         <Tabs.Trigger value="4">
-                        Member
+                        Viewer
                         </Tabs.Trigger>
                     </Tabs.List>
                     <Tabs.Content value="1">

@@ -1,4 +1,4 @@
-import type { CreateProjectTask, ProjectTask } from "@/features/project/project-detail/sections/task/projectTask.model";
+import type { ProjectTask } from "@/features/project/project-detail/sections/task/projectTask.model";
 import { api } from "@/lib/axios";
 import type { ApiResponse } from "@/model/apiResponse.model";
 
@@ -9,7 +9,11 @@ export const getTaskByProjectId = async (project_id: number) => {
   return data;
 };
 
-export const createProjectTask = async (newItem: CreateProjectTask) => {
+export const createProjectTask = async (newItem: FormData) => {
     const { data } = await api.post<ApiResponse>(`/task`, newItem);
     return data;
 }
+// export const createProjectTask = async (newItem: CreateProjectTask) => {
+//     const { data } = await api.post<ApiResponse>(`/task`, newItem);
+//     return data;
+// }
