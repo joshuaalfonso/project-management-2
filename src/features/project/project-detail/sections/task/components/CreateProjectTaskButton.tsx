@@ -10,7 +10,7 @@ export const CreateProjectTaskButton = () => {
     return (
         <Button
             size={'xs'} 
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen('create_task')}
         >
             Create
         </Button>

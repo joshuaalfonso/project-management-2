@@ -1,6 +1,7 @@
 import { EmptyList } from "@/shared/components/EmptyState";
 import { useProjectTask } from "../hooks/useProjectTask";
 import { ProjectTaskTable } from "./ProjectTaskTable";
+import { TaskDetail } from "./TaskDetail";
 
 
 
@@ -17,7 +18,12 @@ export const ProjectTaskTableView = () => {
         return <EmptyList />
     }
 
-    return <ProjectTaskTable projectTasks={projectTasks ?? []} />;
+    return (
+        <>
+            <ProjectTaskTable projectTasks={projectTasks ?? []} />
+            <TaskDetail />
+        </>
+    );
 
 
 }

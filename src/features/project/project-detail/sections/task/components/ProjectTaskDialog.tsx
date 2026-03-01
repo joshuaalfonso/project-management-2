@@ -1,4 +1,4 @@
-import { Avatar, Button, CloseButton, createListCollection, Dialog, Field, Fieldset, FileUpload, Input, Portal, Select, Span, Stack, Text, Textarea } from "@chakra-ui/react"
+import { Avatar, Box, Button, CloseButton, createListCollection, Dialog, Field, Fieldset, FileUpload, Icon, Input, Portal, Select, Span, Stack, Text, Textarea } from "@chakra-ui/react"
 // import { FiPlus } from "react-icons/fi"
 import { useForm, type SubmitHandler } from "react-hook-form"
 // import { toaster } from "@/components/ui/toaster"
@@ -11,7 +11,8 @@ import { useCreateProjectTask } from "../hooks/useCreateProjectTask"
 import { toaster } from "@/components/ui/toaster"
 import { getErrorMessage } from "@/lib/axios"
 import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspaceMember"
-import { HiUpload } from "react-icons/hi"
+// import { HiUpload } from "react-icons/hi"
+import { LuUpload } from "react-icons/lu"
 // import { TextEditor } from "@/shared/components/TextEditor"
 
 
@@ -28,7 +29,6 @@ interface TaskFormvalues {
 
 
 const ProjectTaskDialog = () => {
-
 
     const { 
         open, 
@@ -82,11 +82,8 @@ const ProjectTaskDialog = () => {
             project_id: project_id_number
         }
 
-        console.log(newData)
-
         const formData = new FormData();
 
-        // Normal fields
         formData.append("title", newData.title);
         formData.append("description", newData.description);
         formData.append("start_date", newData.start_date);
@@ -94,12 +91,10 @@ const ProjectTaskDialog = () => {
         formData.append("project_id", String(newData.project_id));
         formData.append("task_priority_id", String(newData.task_priority_id));
 
-        // Array (assignees)
         data.assignees.forEach((id) => {
             formData.append("assignees[]", id);
         });
 
-        // Files
         Array.from(data.attachments).forEach((file) => {
             formData.append("attachments[]", file);
         });
@@ -115,7 +110,7 @@ const ProjectTaskDialog = () => {
                         type: "info",
                         duration: 5000
                     })
-                    setOpen(false)
+                    setOpen('')
                 },
                 onError: (error) => {
                     console.error(error)
@@ -132,13 +127,16 @@ const ProjectTaskDialog = () => {
         // console.log(data)
     }   
     
+    console.log(open)
 
     return (
         <Dialog.Root 
+            scrollBehavior="inside"
             placement={'center'} 
             size={{ mdDown: "full", md: "lg" }}
-            open={open} onOpenChange={(e) => {
-                setOpen(e.open)
+            open={open === 'create_task'} 
+            onOpenChange={() => {
+                setOpen('')
                 reset()
             }}
         >
@@ -167,7 +165,7 @@ const ProjectTaskDialog = () => {
                                     <Fieldset.HelperText>All fields are required.</Fieldset.HelperText>
                                 </Stack>
 
-                                <Fieldset.Content>
+                                <Fieldset.Content gap={'6'}>
 
                                     <Field.Root>
                                         <Field.Label>Title</Field.Label>
@@ -263,62 +261,85 @@ const ProjectTaskDialog = () => {
                                         )}
                                     </Field.Root>
 
-                                    <Field.Root>
-                                        <Field.Label>Start Date</Field.Label>
-                                        <Input
-                                            type="date"
-                                            autoComplete="off"
-                                            {...register("start_date", { required: "Start date is required" })}
-                                            tabIndex={-1}
-                                        />
-                                        {errors.start_date && (
-                                            <Text color="fg.error" fontSize="sm">
-                                                {errors.start_date.message}
-                                            </Text>
-                                        )}
-                                    </Field.Root>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <Field.Root>
+                                            <Field.Label>Start Date</Field.Label>
+                                            <Input
+                                                type="date"
+                                                autoComplete="off"
+                                                {...register("start_date", { required: "Start date is required" })}
+                                                tabIndex={-1}
+                                            />
+                                            {errors.start_date && (
+                                                <Text color="fg.error" fontSize="sm">
+                                                    {errors.start_date.message}
+                                                </Text>
+                                            )}
+                                        </Field.Root>
 
-                                    <Field.Root>
-                                        <Field.Label>End Date</Field.Label>
-                                        <Input
-                                            type="date"
-                                            autoComplete="off"
-                                            {...register("end_date", { required: "End date is required" })}
-                                            tabIndex={-1}
-                                        />
-                                        {errors.end_date && (
-                                            <Text color="fg.error" fontSize="sm">
-                                                {errors.end_date.message}
-                                            </Text>
-                                        )}
-                                    </Field.Root>
+                                        <Field.Root>
+                                            <Field.Label>End Date</Field.Label>
+                                            <Input
+                                                type="date"
+                                                autoComplete="off"
+                                                {...register("end_date", { required: "End date is required" })}
+                                                tabIndex={-1}
+                                            />
+                                            {errors.end_date && (
+                                                <Text color="fg.error" fontSize="sm">
+                                                    {errors.end_date.message}
+                                                </Text>
+                                            )}
+                                        </Field.Root>
+                                    </div>
 
                                     <Field.Root invalid={!!errors.attachments}>
                                         <Field.Label>Attachment</Field.Label>
 
-                                        <FileUpload.Root maxFiles={5}>
+                                        <FileUpload.Root alignItems="stretch" maxFiles={5}>
+
                                             <FileUpload.HiddenInput
-                                            {...register("attachments")}
-                                            accept="
-                                                image/png,
-                                                application/pdf,
-                                                application/vnd.ms-excel,
-                                                application/vnd.ms-powerpoint
-                                            "
+                                                {...register("attachments")}
+                                                accept="
+                                                    image/png,
+                                                    application/pdf,
+                                                    application/vnd.ms-excel,
+                                                    application/vnd.ms-powerpoint,
+                                                    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                "
                                             />
 
-                                            <FileUpload.Trigger asChild>
-                                            <Button variant="outline" size="sm">
-                                                <HiUpload /> Upload file
-                                            </Button>
+                                            {/* <FileUpload.Trigger asChild>
+                                                <Button variant="outline" size="sm">
+                                                    <HiUpload /> Upload file
+                                                </Button>
                                             </FileUpload.Trigger>
 
-                                            <FileUpload.List showSize clearable />
+                                            <FileUpload.List 
+                                                showSize 
+                                                clearable
+                                            /> */}
+
+                                            <FileUpload.Dropzone bg={'bg.subtle'} height="200px">
+                                                <Icon size="md" color="fg.muted">
+                                                <LuUpload />
+                                                </Icon>
+                                                <FileUpload.DropzoneContent>
+                                                <Box>Drag and drop files here</Box>
+                                                <Box color="fg.muted">images, excel and pdf up to 5MB</Box>
+                                                </FileUpload.DropzoneContent>
+                                            </FileUpload.Dropzone>
+
+                                            <FileUpload.List 
+                                                showSize
+                                                clearable
+                                            />
+
                                         </FileUpload.Root>
 
                                         {errors.attachments && (
                                             <Text color="fg.error" fontSize="sm">
-                                            {errors.attachments.message}
+                                                {errors.attachments.message}
                                             </Text>
                                         )}
                                         </Field.Root>
