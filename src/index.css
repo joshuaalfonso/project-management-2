@@ -12,3 +12,30 @@
 }
 
 
+ /* background: var(--chakra-colors-bg-subtle);
+    color: var(--chakra-colors-bg-success) */
+#react-doc-viewer, #header-bar, #proxy-renderer, #image-renderer, #pdf-controls{
+  @apply  bg-[var(--chakra-colors-bg-subtle)]
+}
+
+
+#file-name, #doc-nav-info{
+  @apply text-[var(--chakra-colors-fg)]
+}
+
+
+.rdv-pdf-controls {
+  @apply bg-[var(--chakra-colors-bg-subtle)]! 
+}
+
+.rdv-toolbar-inner svg {
+  /* fill: white !important; */
+}
+
+#doc-nav {
+  @apply flex gap-3
+}
+
+#doc-nav .rdv-btn {
+  @apply bg-transparent shadow-none
+}

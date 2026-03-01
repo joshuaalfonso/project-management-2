@@ -1,14 +1,16 @@
 import type { TaskDetail } from "../projectTask.model"
-import { FiAlignLeft, FiCalendar, FiCircle, FiDownload, FiFlag, FiPaperclip, FiUsers } from "react-icons/fi";
+import { FiAlignLeft, FiCalendar, FiCircle, FiDownload, FiEye, FiFlag, FiPaperclip, FiUsers } from "react-icons/fi";
 import { getPriorityColor, getStatusColor, pickPalette } from "@/lib/task";
 import { DateDifferenceDisplay, DateDisplay } from "@/lib/dateFormat";
 import { EmptyList } from "@/shared/components/EmptyState";
-import { Avatar, Badge, Box, Button, DataList, For, FormatByte, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button, DataList, Dialog, For, FormatByte, HStack, Image, Portal, Stack, Text } from "@chakra-ui/react";
 import img from '@/assets/images/png.png';
 import pdf from '@/assets/images/pdf2.png';
 import excel from '@/assets/images/xls.png';
 import unknown from '@/assets/images/unknown.png';
-
+import { useState } from "react";
+import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
+import "@iamjariwala/react-doc-viewer/dist/index.css";
 
 
 interface Props {
@@ -17,6 +19,23 @@ interface Props {
 
 
 export const TaskDetailDataList = ({taskDetail}: Props) => {
+
+    const imageUrl = 'http://localhost:3000/uploads/images/';
+    const documentUrl = 'http://localhost:3000/uploads/documents/';
+
+    const files = taskDetail?.attachment?.map(item => {
+        const isImage = item.file_type?.startsWith('image/');
+
+        return {
+            uri: (isImage ? imageUrl : documentUrl) + item.file_name,
+            fileName: item.original_name,
+            fileType: item.file_type
+        };
+    }) || [];
+
+    const [activeDocument, setActiveDocument] = useState(files[0]);
+
+    const [open, setOpen] = useState(false)
 
     const getFileType = (file_type: string) => {
         switch (file_type) {
@@ -31,6 +50,11 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
             default:
                 return unknown
         }
+    }
+
+    const handleViewAttachment = (index: number) => {
+        setActiveDocument(files[index]);
+        setOpen(true)
     }
 
     return (
@@ -175,7 +199,7 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                     {taskDetail.attachment.length > 0 ? (
                         <Stack className="w-full" gap={3}>
                             <For each={taskDetail.attachment ?? []}>
-                                {(item) => (
+                                {(item, index) => (
                                     <Box
                                         className="flex items-center gap-3 w-full"
                                         px="2"
@@ -207,13 +231,19 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                                             </Text>
                                         </div>
 
-                                        <div className="flex-1 flex justify-end">
+                                        <div className="flex-1 flex gap-2 justify-end">
+                                            <Button
+                                                size={'xs'}
+                                                variant={'ghost'}
+                                                onClick={() => handleViewAttachment(index)}
+                                            >
+                                                <FiEye />
+                                            </Button>
                                             <Button
                                                 size={'xs'}
                                                 variant={'ghost'}
                                             >
                                                 <FiDownload />
-                                                download
                                             </Button>
                                         </div>
 
@@ -223,7 +253,37 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                         </Stack>
                     ) : <EmptyList />}
 
+                    <Dialog.Root 
+                        size="full" 
+                        open={open} 
+                        onOpenChange={(e) => setOpen(e.open)}
+                    >
+                        {/* <Dialog.Trigger asChild>
+                            <Button>Open Nested</Button>
+                        </Dialog.Trigger> */}
+                        <Portal>
+                            <Dialog.Backdrop />
+                            <Dialog.Positioner>
+                            <Dialog.Content background={'bg.subtle'}>
+                                <Dialog.Header className="max-w-5xl mx-auto! w-full">
+                                    <Dialog.Title>Attachments</Dialog.Title>
+                                </Dialog.Header>
+                                <Dialog.Body >
+                                    <div className="max-w-5xl mx-auto!">
+                                        <DocViewer
+                                            documents={files ?? []}
+                                            pluginRenderers={DocViewerRenderers}
+                                            activeDocument={activeDocument}
+                                        />
+                                    </div>
+                                </Dialog.Body>
+                            </Dialog.Content>
+                            </Dialog.Positioner>
+                        </Portal>
+                    </Dialog.Root>
+
                 </DataList.ItemValue>
+                
             </DataList.Item>
 
         </DataList.Root>

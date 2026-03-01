@@ -305,9 +305,13 @@ const ProjectTaskDialog = () => {
                                                     application/pdf,
                                                     application/vnd.ms-excel,
                                                     application/vnd.ms-powerpoint,
-                                                    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                                                    text/csv,
+                                                    application/vnd.openxmlformats-officedocument.wordprocessingml.document
                                                 "
                                             />
+
+                                    
 
                                             {/* <FileUpload.Trigger asChild>
                                                 <Button variant="outline" size="sm">
@@ -438,6 +442,7 @@ const ProjectTaskDialog = () => {
                         >
                             Create
                         </Button>
+                  
                     </Dialog.Footer>
 
                     <Dialog.CloseTrigger asChild>
