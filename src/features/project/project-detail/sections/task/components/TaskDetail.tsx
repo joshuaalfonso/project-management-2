@@ -1,7 +1,8 @@
-import {  CloseButton, Drawer, Portal } from "@chakra-ui/react"
+import {  CloseButton, Drawer, Portal, Tabs } from "@chakra-ui/react"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
 import { useTaskDetail } from "../hooks/useTaskDetail";
 import { TaskDetailDataList } from "./TaskDetailDataList";
+import SubtaskList from "./taskDetail/SubtaskList";
 
 
 
@@ -34,9 +35,34 @@ export const TaskDetail = () => {
                             {!isPending && error && <p>Failed to load details</p>}
                             
                             { taskDetail && !isPending && !error && (
-                                <TaskDetailDataList 
-                                    taskDetail={taskDetail} 
-                                />
+                                <div className="space-y-6!">
+                                    <TaskDetailDataList 
+                                        taskDetail={taskDetail} 
+                                    />
+
+                                    <Tabs.Root defaultValue="subtasks">
+
+                                        <Tabs.List mb="6">
+                                            <Tabs.Trigger value="subtasks">
+                                                Subtasks ({taskDetail.subtasks.length})
+                                            </Tabs.Trigger>
+                                            <Tabs.Trigger value="comments">
+                                                Comments
+                                            </Tabs.Trigger>
+                                           
+                                        </Tabs.List>
+
+                                        <Tabs.Content value="subtasks">
+                                            <SubtaskList subtasks={taskDetail.subtasks ?? []} />
+                                        </Tabs.Content>
+                                        <Tabs.Content value="comments">
+                                            Manage your comments
+                                        </Tabs.Content>
+                                      
+                                    </Tabs.Root>
+
+                                </div>
+                                
                             ) }
 
                             {/* <Dialog.Root size="full">

@@ -50,6 +50,7 @@ export interface TaskDetail {
   created_at: string
   assignees: Assignee[]
   attachment: Attachment[]
+  subtasks: Subtask[]
 }
 
 export interface Assignee {
@@ -63,4 +64,13 @@ export interface Attachment {
   file_type: string
   original_name: string
   task_attachment_id: number
+}
+
+
+export interface Subtask {
+  subtask_id: number
+  task_id: number
+  subtask_title: string
+  is_completed: number
+  created_at: string
 }

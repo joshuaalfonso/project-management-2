@@ -7,6 +7,7 @@ import { Avatar, Badge, Box, Button, DataList, Dialog, For, FormatByte, HStack, 
 import img from '@/assets/images/png.png';
 import pdf from '@/assets/images/pdf2.png';
 import excel from '@/assets/images/xls.png';
+import doc from '@/assets/images/doc.png';
 import unknown from '@/assets/images/unknown.png';
 import { useState } from "react";
 import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
@@ -45,8 +46,10 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                 return pdf
             case 'application/xlsx':
                 return excel
-            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            case 'text/csv':
                 return excel
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                return doc
             default:
                 return unknown
         }

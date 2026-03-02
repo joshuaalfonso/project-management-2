@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, CloseButton, createListCollection, Dialog, Field, Fieldset, FileUpload, Icon, Input, Portal, Select, Span, Stack, Text, Textarea } from "@chakra-ui/react"
 // import { FiPlus } from "react-icons/fi"
-import { useForm, type SubmitHandler } from "react-hook-form"
+import { useFieldArray, useForm, type SubmitHandler } from "react-hook-form"
 // import { toaster } from "@/components/ui/toaster"
 // import { getErrorMessage } from "@/lib/axios"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
@@ -13,8 +13,14 @@ import { getErrorMessage } from "@/lib/axios"
 import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspaceMember"
 // import { HiUpload } from "react-icons/hi"
 import { LuUpload } from "react-icons/lu"
+import { FiX } from "react-icons/fi"
 // import { TextEditor } from "@/shared/components/TextEditor"
 
+
+interface SubTask {
+  subtask_title: string
+  is_completed: boolean
+}
 
 interface TaskFormvalues {
 //   project_id: number | null
@@ -24,7 +30,8 @@ interface TaskFormvalues {
   start_date: string,
   end_date: string,
   assignees: string[],
-  attachments: File[]
+  attachments: File[],
+  subtasks: SubTask[]
 }
 
 
@@ -69,9 +76,16 @@ const ProjectTaskDialog = () => {
         control
     } = useForm<TaskFormvalues>({
         defaultValues: {
-            assignees: []
+            assignees: [],
+            attachments: [],
+            subtasks: []
         }
     });
+
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "subtasks"
+    })
 
     const onSubmit: SubmitHandler<TaskFormvalues> = (data) => {
 
@@ -93,6 +107,10 @@ const ProjectTaskDialog = () => {
 
         data.assignees.forEach((id) => {
             formData.append("assignees[]", id);
+        });
+
+        data.subtasks.forEach((id) => {
+            formData.append("subtasks[]", id.subtask_title);
         });
 
         Array.from(data.attachments).forEach((file) => {
@@ -165,7 +183,7 @@ const ProjectTaskDialog = () => {
                                     <Fieldset.HelperText>All fields are required.</Fieldset.HelperText>
                                 </Stack>
 
-                                <Fieldset.Content gap={'6'}>
+                                <Fieldset.Content gap={'8'}>
 
                                     <Field.Root>
                                         <Field.Label>Title</Field.Label>
@@ -346,7 +364,52 @@ const ProjectTaskDialog = () => {
                                                 {errors.attachments.message}
                                             </Text>
                                         )}
-                                        </Field.Root>
+                                    </Field.Root>
+
+                                    <Field.Root>
+                                            <Field.Label>Subtask</Field.Label>
+                                            {/* <Input
+                                                type="date"
+                                                autoComplete="off"
+                                                {...register("start_date", { required: "Start date is required" })}
+                                                tabIndex={-1}
+                                            /> */}
+                                            {fields.map((field, index) => (
+                                                <div key={field.id} className="flex w-full gap-4 space-y-3!">
+                                                    
+                                                    <Input
+                                                        type="text"
+                                                        autoComplete="off"
+                                                        {...register(`subtasks.${index}.subtask_title` as const, { required: true })}
+                                                        tabIndex={-1}
+                                                        className="flex-1"
+                                                    />
+
+                                                    {/* <textarea
+                                                    {...register(`subtasks.${index}.description` as const)}
+                                                    placeholder="Subtask description"
+                                                    /> */}
+
+                                                    <Button 
+                                                        variant={'ghost'} 
+                                                        colorPalette={'red'} 
+                                                        type="button" 
+                                                        onClick={() => remove(index)}
+                                                    >
+                                                        <FiX />
+                                                    </Button>
+                                                </div>
+                                            ))}
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    append({ subtask_title: "", is_completed: false })
+                                                }
+                                            >
+                                                Add Subtask
+                                            </button>
+                                    </Field.Root>
 
                                     <Controller
                                         name="assignees"
