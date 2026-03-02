@@ -3,7 +3,7 @@ import { FiAlignLeft, FiCalendar, FiCircle, FiDownload, FiEye, FiFlag, FiPapercl
 import { getPriorityColor, getStatusColor, pickPalette } from "@/lib/task";
 import { DateDifferenceDisplay, DateDisplay } from "@/lib/dateFormat";
 import { EmptyList } from "@/shared/components/EmptyState";
-import { Avatar, Badge, Box, Button, DataList, Dialog, For, FormatByte, HStack, Image, Portal, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button, CloseButton, DataList, Dialog, For, FormatByte, HStack, Image, Portal, Stack, Text } from "@chakra-ui/react";
 import img from '@/assets/images/png.png';
 import pdf from '@/assets/images/pdf2.png';
 import excel from '@/assets/images/xls.png';
@@ -21,8 +21,8 @@ interface Props {
 
 export const TaskDetailDataList = ({taskDetail}: Props) => {
 
-    const imageUrl = 'http://localhost:3000/uploads/images/';
-    const documentUrl = 'http://localhost:3000/uploads/documents/';
+    const imageUrl = 'http://192.168.1.31:3000/uploads/images/';
+    const documentUrl = 'http://192.168.1.31:3000/uploads/documents/';
 
     const files = taskDetail?.attachment?.map(item => {
         const isImage = item.file_type?.startsWith('image/');
@@ -268,9 +268,9 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                             <Dialog.Backdrop />
                             <Dialog.Positioner>
                             <Dialog.Content background={'bg.subtle'}>
-                                <Dialog.Header className="max-w-5xl mx-auto! w-full">
+                                {/* <Dialog.Header className="max-w-5xl mx-auto! w-full">
                                     <Dialog.Title>Attachments</Dialog.Title>
-                                </Dialog.Header>
+                                </Dialog.Header> */}
                                 <Dialog.Body >
                                     <div className="max-w-5xl mx-auto!">
                                         <DocViewer
@@ -280,6 +280,9 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                                         />
                                     </div>
                                 </Dialog.Body>
+                                 <Dialog.CloseTrigger asChild >
+                                    <CloseButton size="sm" />
+                                </Dialog.CloseTrigger>
                             </Dialog.Content>
                             </Dialog.Positioner>
                         </Portal>

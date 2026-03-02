@@ -1,4 +1,4 @@
-import {  CloseButton, Drawer, Portal, Tabs } from "@chakra-ui/react"
+import { CloseButton, Drawer, Portal, Tabs } from "@chakra-ui/react"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
 import { useTaskDetail } from "../hooks/useTaskDetail";
 import { TaskDetailDataList } from "./TaskDetailDataList";
@@ -28,6 +28,7 @@ export const TaskDetail = () => {
                     <Drawer.Content >
                         <Drawer.Header>
                             <Drawer.Title>{ taskDetail?.title }</Drawer.Title>
+                            <Drawer.CloseTrigger asChild />
                         </Drawer.Header>
                         <Drawer.Body >
 
