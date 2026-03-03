@@ -30,7 +30,7 @@ export const TaskDetail = () => {
                             <Drawer.Title>{ taskDetail?.title }</Drawer.Title>
                             <Drawer.CloseTrigger asChild />
                         </Drawer.Header>
-                        <Drawer.Body >
+                        <Drawer.Body pb={'8'}>
 
                             {isPending && <p>Loading...</p>}
                             {!isPending && error && <p>Failed to load details</p>}

@@ -11,7 +11,7 @@ export const useTaskDetail = () => {
     const { selectedId } = useProjectTaskDialog();
 
     const { data: taskDetail, isPending, error } = useQuery({
-        queryKey: ['tasks_detail', selectedId],
+        queryKey: ['task_detail', selectedId],
         queryFn: () => getTaskByIdApi(selectedId as number),
         enabled: selectedId !== undefined,
         staleTime: 1000 * 60 * 5,

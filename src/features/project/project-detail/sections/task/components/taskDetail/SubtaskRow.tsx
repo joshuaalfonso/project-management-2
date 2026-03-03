@@ -1,6 +1,6 @@
 import { Box, Checkbox } from "@chakra-ui/react"
 import type { Subtask } from "../../projectTask.model"
-import { useState } from "react"
+import { useCompleteSubtask } from "../../hooks/useCompleteSubTask"
 
 
 interface Props {
@@ -9,7 +9,17 @@ interface Props {
 
 const SubtaskRow = ({ subtask }: Props) => {
 
-    const [checked, setChecked] = useState(false)
+    const { 
+        completeSubtaskMutation, 
+        isPending } = 
+    useCompleteSubtask(subtask.task_id);
+
+    const handleCheck = (isCompleted: boolean) => {
+        completeSubtaskMutation({
+            isCompleted, 
+            subtask_id: subtask.subtask_id
+        })
+    }
 
     return (
         <Box 
@@ -20,18 +30,19 @@ const SubtaskRow = ({ subtask }: Props) => {
             rounded="md"
         >
             <Checkbox.Root 
-                checked={checked}
-                onCheckedChange={(e) => setChecked(!!e.checked)}
+                checked={subtask.is_completed === 1}
+                onCheckedChange={(e) => handleCheck(!!e.checked)}
                 size={'sm'}
                 variant={'solid'}
+                disabled={isPending}
             >
                 <Checkbox.HiddenInput />
                 <Checkbox.Control />
                 <Checkbox.Label 
-                    className={checked ? 'line-through' : ''}
-                    color={checked ? 'fg.muted' : ''}
+                    className={subtask.is_completed === 1 ? 'line-through' : ''}
+                    color={subtask.is_completed === 1 ? 'fg.muted' : ''}
                 >
-                    {subtask.subtask_title}
+                    {subtask.subtask_title} 
                 </Checkbox.Label>
             </Checkbox.Root>
         </Box>
