@@ -1,5 +1,5 @@
 import { Table } from "@chakra-ui/react"
-import type { ProjectTask } from "../projectTask.model"
+import type { ProjectTask } from "../hooks/projectTask.model"
 import ProjectTaskRow from "./ProjectTaskRow"
 
 
@@ -16,7 +16,7 @@ export const ProjectTaskTable = ({projectTasks} : Props) => {
                 <Table.Header>
                     <Table.Row background={'bg.subtle'}>
                         <Table.ColumnHeader>Title</Table.ColumnHeader>
-                        <Table.ColumnHeader>Attachment</Table.ColumnHeader>
+                        <Table.ColumnHeader>Summary</Table.ColumnHeader>
                         <Table.ColumnHeader>Tags</Table.ColumnHeader>
                         <Table.ColumnHeader>Due Date</Table.ColumnHeader>
                         <Table.ColumnHeader>Assignees</Table.ColumnHeader>

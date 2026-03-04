@@ -18,6 +18,7 @@ export interface ProjectTask {
   completed_at: string | null
   created_at: string
   attachment_count: number
+  subtask_count: number
   assignees: {user_id: number, user_fullname: string}[]
 }
 

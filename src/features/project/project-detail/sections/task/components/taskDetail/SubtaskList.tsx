@@ -1,5 +1,5 @@
 import { For, Stack } from "@chakra-ui/react"
-import type { Subtask } from "../../projectTask.model"
+import type { Subtask } from "../../hooks/projectTask.model"
 import SubtaskRow from "./SubtaskRow"
 
 

@@ -1,4 +1,4 @@
-import type { ProjectTask } from "@/features/project/project-detail/sections/task/projectTask.model";
+import type { ProjectTask } from "@/features/project/project-detail/sections/task/hooks/projectTask.model";
 import { api } from "@/lib/axios";
 import type { ApiResponse } from "@/model/apiResponse.model";
 

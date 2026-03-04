@@ -1,5 +1,5 @@
 import { Box, Checkbox } from "@chakra-ui/react"
-import type { Subtask } from "../../projectTask.model"
+import type { Subtask } from "../../hooks/projectTask.model"
 import { useCompleteSubtask } from "../../hooks/useCompleteSubTask"
 
 
@@ -20,6 +20,7 @@ const SubtaskRow = ({ subtask }: Props) => {
             subtask_id: subtask.subtask_id
         })
     }
+    
 
     return (
         <Box 

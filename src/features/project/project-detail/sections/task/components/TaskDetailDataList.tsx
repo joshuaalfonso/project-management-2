@@ -1,9 +1,9 @@
-import type { TaskDetail } from "../projectTask.model"
+import type { TaskDetail } from "../hooks/projectTask.model"
 import { FiAlignLeft, FiCalendar, FiCircle, FiDownload, FiEye, FiFlag, FiPaperclip, FiUsers } from "react-icons/fi";
 import { getPriorityColor, getStatusColor, pickPalette } from "@/lib/task";
 import { DateDifferenceDisplay, DateDisplay } from "@/lib/dateFormat";
 import { EmptyList } from "@/shared/components/EmptyState";
-import { Avatar, Badge, Box, Button, CloseButton, DataList, Dialog, For, FormatByte, HStack, Image, Portal, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Button, CloseButton, DataList, Dialog, For, FormatByte, HStack, Image, Popover, Portal, Stack, Text } from "@chakra-ui/react";
 import img from '@/assets/images/png.png';
 import pdf from '@/assets/images/pdf2.png';
 import excel from '@/assets/images/xls.png';
@@ -12,6 +12,7 @@ import unknown from '@/assets/images/unknown.png';
 import { useState } from "react";
 import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
 import "@iamjariwala/react-doc-viewer/dist/index.css";
+import { EditableField } from "./EditableField";
 
 
 interface Props {
@@ -60,6 +61,8 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
         setOpen(true)
     }
 
+    const [statusOpen, setStatusOpen] = useState(false)
+
     return (
         <DataList.Root orientation="horizontal">
             <DataList.Item>
@@ -74,14 +77,39 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                     </Stack>
                 </DataList.ItemLabel>
                 <DataList.ItemValue>
-                    <Stack direction={'row'} alignItems={'center'}>
+                    {/* <Stack direction={'row'} alignItems={'center'}>
                         <Text color={getStatusColor(taskDetail?.task_status_name)}>
                             <FiCircle />
                         </Text>
                         <Text textTransform={'capitalize'}>
                             {taskDetail?.task_status_name}
                         </Text>
-                    </Stack>
+                    </Stack> */}
+                    <Popover.Root 
+                        open={statusOpen} 
+                        onOpenChange={(e) => setStatusOpen(e.open)}
+                        positioning={{ placement: "bottom-start" }}
+                    >
+                        <Popover.Trigger asChild>
+                            <Stack direction={'row'} alignItems={'center'}>
+                                <Text color={getStatusColor(taskDetail?.task_status_name)}>
+                                    <FiCircle />
+                                </Text>
+                                <Text textTransform={'capitalize'}>
+                                    {taskDetail?.task_status_name}
+                                </Text>
+                            </Stack>
+                        </Popover.Trigger>
+                        <Portal>
+                            <Popover.Positioner >
+                            <Popover.Content>
+                                <Popover.Body>
+                                This is a popover with the same width as the trigger button
+                                </Popover.Body>
+                            </Popover.Content>
+                            </Popover.Positioner>
+                        </Portal>
+                        </Popover.Root>
                 </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
@@ -170,15 +198,14 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                     </Stack>
                 </DataList.ItemLabel>
                 <DataList.ItemValue>
-                    {/* <Box 
-                        p="2"
-                        borderWidth="1px"
-                        borderColor="border.disabled"
-                        rounded={'md'}
-                        w="full"
-                    > */}
+                   
+                   <EditableField 
+                        type="text"
+                        value={taskDetail.description}
+                   >
                         {taskDetail.description}
-                    {/* </Box> */}
+                   </EditableField>
+                    
                 </DataList.ItemValue>
             </DataList.Item>
 

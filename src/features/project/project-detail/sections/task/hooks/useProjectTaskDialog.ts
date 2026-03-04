@@ -3,7 +3,7 @@
 
 
 import { createDialogContext } from "@/context/dialog/CreateDialogContext";
-import type { TaskDetail } from "../projectTask.model";
+import type { TaskDetail } from "./projectTask.model";
 
 
 

@@ -1,7 +1,7 @@
 import { Avatar, AvatarGroup, Badge, Button, Stack, Table, Text } from "@chakra-ui/react"
-import type { ProjectTask } from "../projectTask.model"
+import type { ProjectTask } from "../hooks/projectTask.model"
 import { BiCircle } from "react-icons/bi"
-import { FiClock, FiEye, FiLink } from "react-icons/fi"
+import { FiCheckSquare, FiClock, FiEye, FiLink } from "react-icons/fi"
 import { HiFlag } from "react-icons/hi"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
 import { getPriorityColor, getStatusColor, pickPalette } from "@/lib/task"
@@ -20,7 +20,6 @@ const ProjectTaskRow = ({item}: Props) => {
         setSelectedId
     } = useProjectTaskDialog();
 
-    
 
     return (
         <Table.Row 
@@ -31,10 +30,16 @@ const ProjectTaskRow = ({item}: Props) => {
             {/* borderBottom={index === projectTasks.length - 1 ? 'none' : undefined} */}
             <Table.Cell>{item.title}</Table.Cell>
             <Table.Cell>
-                <div className="flex items-center gap-2">
-                    <FiLink /> 
-                    <Text >{item.attachment_count}</Text>
-                </div>
+                <Stack direction={'row'} gap={4}>
+                    <div className="flex items-center gap-2">
+                        <FiLink /> 
+                        <Text >{item.attachment_count}</Text>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <FiCheckSquare /> 
+                        <Text >{item.subtask_count}</Text>
+                    </div>
+                </Stack>
             </Table.Cell>
             <Table.Cell>
                 <div className="flex items-center gap-3">

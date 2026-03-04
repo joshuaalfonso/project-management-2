@@ -2,7 +2,7 @@
 
 
 
-import type { TaskDetail } from "@/features/project/project-detail/sections/task/projectTask.model";
+import type { TaskDetail } from "@/features/project/project-detail/sections/task/hooks/projectTask.model";
 import type { TaskPriority } from "@/features/taskPriority/taskPriority.model";
 import { api } from "@/lib/axios";
 
