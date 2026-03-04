@@ -24,7 +24,7 @@ type EditableFieldProps =
   | SelectFieldProps
 
 
-export const EditableField = ({children, type, value}: EditableFieldProps) => {
+export const EditableField = ({children, type, value, onSave}: EditableFieldProps) => {
 
 
     const [isEditing, setIsEditing] = useState(false);
@@ -41,8 +41,11 @@ export const EditableField = ({children, type, value}: EditableFieldProps) => {
     };
 
     useClickOutside(wrapperRef, () => {
-        if (isEditing) {
-            handleCancel(); 
+        if (isEditing && value !== tempValue) {
+            onSave?.(tempValue); 
+            handleCancel()
+        } else {
+            handleCancel()
         }
     });
 

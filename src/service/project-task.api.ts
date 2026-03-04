@@ -13,6 +13,13 @@ export const createProjectTask = async (newItem: FormData) => {
     const { data } = await api.post<ApiResponse>(`/task`, newItem);
     return data;
 }
+
+export const updateTaskDescriptionApi = async (description: string, task_id: number) => {
+  const { data } = await api.put<ApiResponse>(`/task/${task_id}/description`, {description});
+  return data;
+}
+
+
 // export const createProjectTask = async (newItem: CreateProjectTask) => {
 //     const { data } = await api.post<ApiResponse>(`/task`, newItem);
 //     return data;

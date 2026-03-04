@@ -13,6 +13,7 @@ import { useState } from "react";
 import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
 import "@iamjariwala/react-doc-viewer/dist/index.css";
 import { EditableField } from "./EditableField";
+import { useUpdateTaskDescription } from "../hooks/useUpdateTaskDescription";
 
 
 interface Props {
@@ -61,7 +62,13 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
         setOpen(true)
     }
 
-    const [statusOpen, setStatusOpen] = useState(false)
+    const [statusOpen, setStatusOpen] = useState(false);
+
+    const { updateTaskDescriptionMutation } = useUpdateTaskDescription(taskDetail.task_id);
+
+    const handleUpdateDescription = (value: string) => {
+            updateTaskDescriptionMutation({description: value})
+    }
 
     return (
         <DataList.Root orientation="horizontal">
@@ -202,6 +209,7 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                    <EditableField 
                         type="text"
                         value={taskDetail.description}
+                        onSave={handleUpdateDescription}
                    >
                         {taskDetail.description}
                    </EditableField>

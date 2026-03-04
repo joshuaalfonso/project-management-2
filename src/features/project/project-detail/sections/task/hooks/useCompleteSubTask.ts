@@ -1,4 +1,4 @@
-import { completeSubtaskApi } from "@/service/subtask"
+import { completeSubtaskApi } from "@/service/subTask";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 interface CompleteSubtask {

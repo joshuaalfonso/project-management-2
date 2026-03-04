@@ -37,5 +37,12 @@
 }
 
 #doc-nav .rdv-btn {
-  @apply bg-transparent shadow-none
+  @apply bg-transparent shadow-none text-red-200!
+}
+
+#doc-nav-prev svg,
+#doc-nav-next svg,
+#doc-nav-prev svg path,
+#doc-nav-next svg path {
+  fill: var(--chakra-colors-fg) !important;
 }
