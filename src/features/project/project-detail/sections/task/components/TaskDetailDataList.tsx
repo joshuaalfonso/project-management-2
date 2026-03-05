@@ -14,6 +14,7 @@ import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
 import "@iamjariwala/react-doc-viewer/dist/index.css";
 import { EditableField } from "./EditableField";
 import { useUpdateTaskDescription } from "../hooks/useUpdateTaskDescription";
+import { useTaskPriority } from "@/features/taskPriority/hooks/useTaskPriority";
 
 
 interface Props {
@@ -22,6 +23,13 @@ interface Props {
 
 
 export const TaskDetailDataList = ({taskDetail}: Props) => {
+
+     const { taskPriority } = useTaskPriority();
+
+    const taskPriorityOptions = (taskPriority?? []).map((item) => ({
+        label: item.task_priority_name,
+        value: item.task_priority_id,
+    }));
 
     const imageUrl = 'http://192.168.1.31:3000/uploads/images/';
     const documentUrl = 'http://192.168.1.31:3000/uploads/documents/';
@@ -131,10 +139,22 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                     </Stack>
                 </DataList.ItemLabel>
                 <DataList.ItemValue>
-                    <Badge colorPalette={getPriorityColor(taskDetail?.task_priority_name)}>
+                    {/* <Badge colorPalette={getPriorityColor(taskDetail?.task_priority_name)}>
                         <FiFlag />
                         {taskDetail.task_priority_name}
-                    </Badge>
+                    </Badge> */}
+
+                    <EditableField 
+                        type="select"
+                        value={String(taskDetail.task_priority_id)}
+                        options={taskPriorityOptions}
+                   >
+                        <Badge colorPalette={getPriorityColor(taskDetail?.task_priority_name)}>
+                            <FiFlag />
+                            {taskDetail.task_priority_name}
+                        </Badge>
+                   </EditableField>
+
                 </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
@@ -245,6 +265,7 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                                         borderWidth="1px"
                                         borderColor="border.disabled"
                                         rounded={'md'}
+                                        key={item.task_attachment_id}
                                     >
                                         <div className="h-9 w-9">
                                             <Image

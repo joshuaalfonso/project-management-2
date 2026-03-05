@@ -17,7 +17,7 @@ const SubtaskList = ({subtasks}: Props) => {
             each={subtasks}
         >
             {(item) => (
-                <SubtaskRow subtask={item} />
+                <SubtaskRow subtask={item} key={item.subtask_id} />
             )}
         </For>
     </Stack>
