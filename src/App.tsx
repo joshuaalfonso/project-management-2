@@ -3,7 +3,6 @@ import './App.css'
 import Layout from './layout/Layout'
 import Login from './pages/Login/Login'
 import Dashboard from './pages/Dashboard/Dashboard'
-import Project from './pages/Project/Project'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 import MyTask from './pages/MyTask/MyTask'
 import ProjectDetail from './pages/Project/ProjectDetail'
@@ -19,6 +18,7 @@ import { Toaster } from './components/ui/toaster'
 import { ProtectedRoutes } from './context/auth/ProtectedRoutes'
 import WorkspaceMember from './pages/WorkspaceMember/WorkspaceMember'
 import WorkspaceSetting from './pages/WorkspaceSetting/WorkspaceSetting'
+import Project from './pages/Project/Project'
 
 function App() { 
 

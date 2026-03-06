@@ -1,12 +1,12 @@
 import { Button, CloseButton, Dialog, Field, Fieldset, Input, Portal, Stack, Text } from "@chakra-ui/react"
 import { FiPlus } from "react-icons/fi"
-import { useProjectDialog } from "../hooks/useProjectDialog"
 import { Controller, useForm, type SubmitHandler } from "react-hook-form"
 import { useWorkSpace } from "@/context/workspace/useWorkspace"
-import { useCreateProject } from "../hooks/useCreateProject"
 import { toaster } from "@/components/ui/toaster"
 import { getErrorMessage } from "@/lib/axios"
 import TiptapEditor from "@/shared/components/TiptapEdit"
+import { useCreateProject } from "./useCreateProject"
+// import { useProjectDialog } from "./useProjectDialog"
 // import { TextEditor } from "@/shared/components/TextEditor"
 
 
@@ -19,7 +19,7 @@ interface ProjectFormvalues {
 const ProjectDialog = () => {
 
 
-    const { open, setOpen } = useProjectDialog();
+    // const { open, setOpen } = useProjectDialog();
     const { activeWorkspace } = useWorkSpace();
     const { createProjectMutation, isCreating } = useCreateProject();
 
@@ -28,7 +28,7 @@ const ProjectDialog = () => {
         handleSubmit,
         control,
         formState: { errors, isSubmitting },
-        reset
+        // reset
     } = useForm<ProjectFormvalues>({defaultValues: {project_description: "<p>Enter project description here...</p>"}});
 
     const onSubmit: SubmitHandler<ProjectFormvalues> = (data) => {
@@ -48,7 +48,7 @@ const ProjectDialog = () => {
                         type: "info",
                         duration: 5000
                     })
-                    setOpen(false)
+                    // setOpen('')
                 },
                 onError: (error) => {
                     console.error(error)
@@ -70,10 +70,11 @@ const ProjectDialog = () => {
         <Dialog.Root 
             placement={'center'} 
             size={{ mdDown: "full", md: "lg" }}
-            open={open} onOpenChange={(e) => {
-                setOpen(e.open)
-                reset()
-            }}
+            // open={open === 'create_project'} 
+            // onOpenChange={(e) => {
+            //     setOpen(e.open)
+            //     reset()
+            // }}
         >
         <Dialog.Trigger asChild>
             <Button variant="solid" size="xs" >

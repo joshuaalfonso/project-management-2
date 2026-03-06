@@ -14,7 +14,12 @@ const Task = () => {
   return (
     <> 
 
-        <Tabs.Root defaultValue="table_view" variant={'enclosed'} size={'sm'} fitted >
+        <Tabs.Root 
+          defaultValue="table_view" 
+          variant={'enclosed'} 
+          size={'sm'} 
+          // fitted 
+        >
 
           <div className="flex items-center justify-between mb-8!">
             <Tabs.List height={'1'}>

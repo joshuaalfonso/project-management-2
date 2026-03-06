@@ -19,6 +19,11 @@ export const updateTaskDescriptionApi = async (description: string, task_id: num
   return data;
 }
 
+export const updateTaskPriorityApi = async (task_priority_id: number, task_id: number) => {
+  const { data } = await api.put<ApiResponse>(`/task/${task_id}/priority`, {task_priority_id});
+  return data;
+}
+
 
 // export const createProjectTask = async (newItem: CreateProjectTask) => {
 //     const { data } = await api.post<ApiResponse>(`/task`, newItem);

@@ -1,5 +1,5 @@
 import { createDialogContext } from "@/context/dialog/CreateDialogContext";
-import type { ProjectList } from "../project.model";
+import type { ProjectList } from "../project-list/project.model";
 
 
 

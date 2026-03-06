@@ -14,7 +14,7 @@ interface SelectFieldProps {
     type: "select";
     value: string;
     options: SelectOption[];
-    onSave?: (value: string) => void;
+    onSave: (value: number) => void;
     children: React.ReactNode;
 };
 
@@ -46,19 +46,22 @@ const EditableSelect = (props: SelectFieldProps) => {
     // });
 
     useClickOutside(wrapperRef, () => {
+        // setTimeout(() => {
+        //   if (isEditing && value != tempValue) {
+        //     onSave(Number(tempValue));
+        //   } else {
+        //     handleCancel();
+        //   }
+        // }, 100);
         setTimeout(() => {
-          if (isEditing && value !== tempValue) {
-            onSave?.(tempValue);
-          } else {
-            handleCancel();
-          }
-        }, 100);
-      });
+            handleCancel()
+        }, 100)
+    });
 
     const collection = useMemo(() => {
-        const selectProps = props as SelectFieldProps;
+        // const selectProps = props as SelectFieldProps;
         return createListCollection({
-            items: selectProps.options,
+            items: props.options,
             itemToString: (item) => item.label,
             itemToValue: (item) => String(item.value),
         });
@@ -82,7 +85,16 @@ const EditableSelect = (props: SelectFieldProps) => {
                         onValueChange={(details) => {
                             const selectedValue = details.value[0];
                             setTempValue(String(selectedValue));
-                            console.log("Selected:", selectedValue); 
+                        }}
+
+                        onSelect={(details) => {
+
+                            if (details.value != value) {
+                                console.log(details.value)
+                                onSave(Number(details.value))
+                            }
+                            setIsEditing(false);
+
                         }}
                         size={'sm'}
                         

@@ -12,9 +12,11 @@ import unknown from '@/assets/images/unknown.png';
 import { useState } from "react";
 import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
 import "@iamjariwala/react-doc-viewer/dist/index.css";
-import { EditableField } from "./EditableField";
 import { useUpdateTaskDescription } from "../hooks/useUpdateTaskDescription";
 import { useTaskPriority } from "@/features/taskPriority/hooks/useTaskPriority";
+import EditableSelect from "./EditableSelect";
+import { useUpdateTaskPriority } from "../hooks/useUpdateTaskPriority";
+import EditableTextArea from "./EditableTextArea";
 
 
 interface Props {
@@ -73,10 +75,15 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
     const [statusOpen, setStatusOpen] = useState(false);
 
     const { updateTaskDescriptionMutation } = useUpdateTaskDescription(taskDetail.task_id);
+    const { updateTaskPriorityMutation } = useUpdateTaskPriority(taskDetail.task_id);
 
     const handleUpdateDescription = (value: string) => {
             updateTaskDescriptionMutation({description: value})
     }
+
+    const handleUpdatePriority = (task_priority_id: number) => {{
+        updateTaskPriorityMutation({task_priority_id})
+    }}
 
     return (
         <DataList.Root orientation="horizontal">
@@ -144,16 +151,17 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                         {taskDetail.task_priority_name}
                     </Badge> */}
 
-                    <EditableField 
+                    <EditableSelect 
                         type="select"
                         value={String(taskDetail.task_priority_id)}
                         options={taskPriorityOptions}
+                        onSave={handleUpdatePriority}
                    >
                         <Badge colorPalette={getPriorityColor(taskDetail?.task_priority_name)}>
                             <FiFlag />
                             {taskDetail.task_priority_name}
                         </Badge>
-                   </EditableField>
+                   </EditableSelect>
 
                 </DataList.ItemValue>
             </DataList.Item>
@@ -210,9 +218,9 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
             </DataList.Item>
 
             <DataList.Item 
-                // display="flex"
+                display="flex"
                 // flexDirection="column"
-                // alignItems="flex-start"
+                alignItems="flex-start"
             >
                 <DataList.ItemLabel>
                     <Stack 
@@ -226,13 +234,12 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                 </DataList.ItemLabel>
                 <DataList.ItemValue>
                    
-                   <EditableField 
-                        type="text"
+                   <EditableTextArea 
                         value={taskDetail.description}
                         onSave={handleUpdateDescription}
                    >
                         {taskDetail.description}
-                   </EditableField>
+                   </EditableTextArea>
                     
                 </DataList.ItemValue>
             </DataList.Item>
