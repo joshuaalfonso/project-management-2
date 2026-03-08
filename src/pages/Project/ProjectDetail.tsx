@@ -93,7 +93,6 @@ const ProjectDetail = () => {
                 onValueChange={(value: { value: string }) => navigate(`/project/${project_id}/${value.value}`)}
             >
 
-
                 <Tabs.List 
                     mb={'8'}  
                     

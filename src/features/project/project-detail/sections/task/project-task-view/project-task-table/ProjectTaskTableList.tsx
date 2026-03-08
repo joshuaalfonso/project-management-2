@@ -1,5 +1,5 @@
 import { Table } from "@chakra-ui/react"
-import type { ProjectTask } from "../hooks/projectTask.model"
+import type { ProjectTask } from "../../hooks/projectTask.model"
 import ProjectTaskRow from "./ProjectTaskRow"
 
 
@@ -8,7 +8,7 @@ interface Props {
     projectTasks: ProjectTask[]
 }
 
-export const ProjectTaskTable = ({projectTasks} : Props) => {
+export const ProjectTaskTableList = ({projectTasks} : Props) => {
 
     return (
         <Table.ScrollArea>

@@ -2,7 +2,7 @@ import { CloseButton, Drawer, Portal, Tabs } from "@chakra-ui/react"
 import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
 import { useTaskDetail } from "../hooks/useTaskDetail";
 import { TaskDetailDataList } from "./TaskDetailDataList";
-import SubtaskList from "./taskDetail/SubtaskList";
+import SubtaskList from "./SubtaskList";
 
 
 

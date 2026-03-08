@@ -19,8 +19,12 @@ export const getProjectDescription = async (params: {project_id: number}) => {
   return data;
 };
 
-
-export const createProject = async (newItem: CreateEditProject) => {
+export const createProjectApi = async (newItem: CreateEditProject) => {
     const { data } = await api.post<ApiResponse>(`/project`, newItem);
+    return data;
+}
+
+export const updateProjectApi = async (updatedItem: CreateEditProject) => {
+    const { data } = await api.put<ApiResponse>(`/project`, updatedItem);
     return data;
 }

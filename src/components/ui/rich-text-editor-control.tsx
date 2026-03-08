@@ -28,7 +28,6 @@ import {
   LuHeading2,
   LuHeading3,
   LuHeading4,
-  LuHighlighter,
   LuItalic,
   LuLink,
   LuLink2,
@@ -44,6 +43,7 @@ import {
   LuType,
   LuUnderline,
 } from "react-icons/lu"
+
 
 export interface BaseControlConfig {
   label: string
@@ -558,31 +558,31 @@ export const TextColor = createSwatchControl({
   onRemove: (editor) => editor.chain().focus().unsetMark("textStyle").run(),
 })
 
-const HIGHLIGHT_SWATCH_OPTIONS = [
-  { label: "Yellow", value: "#FFFF00", color: "#FFFF00" },
-  { label: "Green", value: "#00FF00", color: "#00FF00" },
-  { label: "Cyan", value: "#00FFFF", color: "#00FFFF" },
-  { label: "Pink", value: "#FF69B4", color: "#FF69B4" },
-  { label: "Orange", value: "#FFA500", color: "#FFA500" },
-  { label: "Purple", value: "#DDA0DD", color: "#DDA0DD" },
-]
+// const HIGHLIGHT_SWATCH_OPTIONS = [
+//   { label: "Yellow", value: "#FFFF00", color: "#FFFF00" },
+//   { label: "Green", value: "#00FF00", color: "#00FF00" },
+//   { label: "Cyan", value: "#00FFFF", color: "#00FFFF" },
+//   { label: "Pink", value: "#FF69B4", color: "#FF69B4" },
+//   { label: "Orange", value: "#FFA500", color: "#FFA500" },
+//   { label: "Purple", value: "#DDA0DD", color: "#DDA0DD" },
+// ]
 
-export const Highlight = createSwatchControl({
-  label: "Highlight",
-  swatches: HIGHLIGHT_SWATCH_OPTIONS,
-  getValue: (editor) => {
-    const color = editor.getAttributes("highlight")?.color
-    return color || ""
-  },
-  getProps: (editor) => ({
-    variant: editor.getAttributes("highlight")?.color ? "subtle" : "ghost",
-  }),
-  command: (editor, color) =>
-    editor.chain().focus().toggleHighlight({ color }).run(),
-  icon: LuHighlighter,
-  showRemove: true,
-  onRemove: (editor) => editor.chain().focus().unsetHighlight().run(),
-})
+// export const Highlight = createSwatchControl({
+//   label: "Highlight",
+//   swatches: HIGHLIGHT_SWATCH_OPTIONS,
+//   getValue: (editor) => {
+//     const color = editor.getAttributes("highlight")?.color
+//     return color || ""
+//   },
+//   getProps: (editor) => ({
+//     variant: editor.getAttributes("highlight")?.color ? "subtle" : "ghost",
+//   }),
+//   command: (editor, color) =>
+//     editor.chain().focus().toggleHighlight({ color }).run(),
+//   icon: LuHighlighter,
+//   showRemove: true,
+//   onRemove: (editor) => editor.chain().focus().unsetHighlight().run(),
+// })
 
 const TEXT_STYLE_OPTIONS = [
   { value: "paragraph", label: "Paragraph" },

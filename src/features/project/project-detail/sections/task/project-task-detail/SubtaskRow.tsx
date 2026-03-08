@@ -1,6 +1,6 @@
 import { Box, Checkbox } from "@chakra-ui/react"
-import type { Subtask } from "../../hooks/projectTask.model"
-import { useCompleteSubtask } from "../../hooks/useCompleteSubTask"
+import type { Subtask } from "../hooks/projectTask.model";
+import { useCompleteSubtask } from "../hooks/useCompleteSubTask";
 
 
 interface Props {

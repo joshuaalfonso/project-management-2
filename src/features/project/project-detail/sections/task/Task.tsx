@@ -1,15 +1,13 @@
 
 // import { useProjectTaskDialog } from "./hooks/useProjectTaskDialog";
 import { Tabs } from "@chakra-ui/react";
-import ProjectTaskDialog from "./components/ProjectTaskDialog";
-import { ProjectTaskTableView } from "./components/ProjectTaskTableView";
+import ProjectTaskDialog from "./project-task-dialog/ProjectTaskDialog";
 import { LuGrid2X2, LuList } from "react-icons/lu";
 import { CreateProjectTaskButton } from "./components/CreateProjectTaskButton";
+import { ProjectTaskTable } from "./project-task-view/project-task-table/ProjectTaskTableView";
 
 
 const Task = () => {
-
-  // const { setOpen } = useProjectTaskDialog();
 
   return (
     <> 
@@ -46,20 +44,13 @@ const Task = () => {
 
             </Tabs.List>
 
-            {/* <Button 
-              size={'xs'} 
-              onClick={() => setOpen(true)}
-            >
-              Create
-            </Button> */}
-
             <CreateProjectTaskButton />
 
           </div>
 
           <Tabs.Content value="table_view">
             <ProjectTaskDialog />
-            <ProjectTaskTableView />
+            <ProjectTaskTable />
           </Tabs.Content>
 
           <Tabs.Content value="card_view">

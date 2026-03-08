@@ -1,9 +1,9 @@
 import { Avatar, AvatarGroup, Badge, Button, Stack, Table, Text } from "@chakra-ui/react"
-import type { ProjectTask } from "../hooks/projectTask.model"
+import type { ProjectTask } from "../../hooks/projectTask.model"
 import { BiCircle } from "react-icons/bi"
 import { FiCheckSquare, FiClock, FiEye, FiLink } from "react-icons/fi"
 import { HiFlag } from "react-icons/hi"
-import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
+import { useProjectTaskDialog } from "../../hooks/useProjectTaskDialog"
 import { getPriorityColor, getStatusColor, pickPalette } from "@/lib/task"
 
 

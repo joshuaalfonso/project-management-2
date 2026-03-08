@@ -86,6 +86,7 @@ function TiptapEditor({ value, onChange }: TiptapEditorProps) {
 
         <RichTextEditor.Content />
       </RichTextEditor.Root>
+      
     </Box>
   )
 }

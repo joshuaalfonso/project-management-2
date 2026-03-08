@@ -14,9 +14,9 @@ import DocViewer, { DocViewerRenderers } from "@iamjariwala/react-doc-viewer";
 import "@iamjariwala/react-doc-viewer/dist/index.css";
 import { useUpdateTaskDescription } from "../hooks/useUpdateTaskDescription";
 import { useTaskPriority } from "@/features/taskPriority/hooks/useTaskPriority";
-import EditableSelect from "./EditableSelect";
+import EditableSelect from "../components/EditableSelect";
 import { useUpdateTaskPriority } from "../hooks/useUpdateTaskPriority";
-import EditableTextArea from "./EditableTextArea";
+import EditableTextArea from "../components/EditableTextArea";
 
 
 interface Props {

@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/charts": "^3.31.0",
-    "@chakra-ui/react": "^3.31.0",
+    "@chakra-ui/charts": "^3.34.0",
+    "@chakra-ui/react": "^3.34.0",
     "@cyntler/react-doc-viewer": "^1.17.1",
     "@emotion/react": "^11.14.0",
     "@iamjariwala/react-doc-viewer": "^1.8.0",
@@ -35,7 +35,8 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.13.0",
     "recharts": "^3.7.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

@@ -3,8 +3,6 @@ import { getProjectByWorkspace } from "@/service/project.api"
 import { useQuery } from "@tanstack/react-query"
 
 
-
-
 export const useProject = () => {
 
     const { activeWorkspace } = useWorkSpace();

@@ -14,6 +14,7 @@ import { useWorkspaceMember } from "@/features/WorkspaceMember/hooks/useWorkspac
 // import { HiUpload } from "react-icons/hi"
 import { LuUpload } from "react-icons/lu"
 import { FiX } from "react-icons/fi"
+import RHFDatePicker from "@/shared/components/RHFDatePicker"
 // import { TextEditor } from "@/shared/components/TextEditor"
 
 
@@ -281,7 +282,7 @@ const ProjectTaskDialog = () => {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         <Field.Root>
-                                            <Field.Label>Start Date</Field.Label>
+                                            {/* <Field.Label>Start Date</Field.Label>
                                             <Input
                                                 type="date"
                                                 autoComplete="off"
@@ -292,7 +293,14 @@ const ProjectTaskDialog = () => {
                                                 <Text color="fg.error" fontSize="sm">
                                                     {errors.start_date.message}
                                                 </Text>
-                                            )}
+                                            )} */}
+                                            <RHFDatePicker
+                                                name="start_date"
+                                                label="Start Date"
+                                                control={control}
+                                                errors={errors}
+                                                rules={{ required: "Start date is required" }}
+                                            />
                                         </Field.Root>
 
                                         <Field.Root>
