@@ -1,7 +1,4 @@
 
-
-
-
 const colorPalette = ["red", "blue", "green", "yellow", "purple", "orange"]
 
 export const pickPalette = (name: string) => {

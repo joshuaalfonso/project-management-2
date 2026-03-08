@@ -14,9 +14,9 @@ export const EmptyList = () => {
                 </EmptyState.Indicator>
                 <VStack textAlign="center">
                 <EmptyState.Title>List is empty</EmptyState.Title>
-                <EmptyState.Description>
+                {/* <EmptyState.Description>
                     Add a new item to get started
-                </EmptyState.Description>
+                </EmptyState.Description> */}
                 </VStack>
                 {/* <ButtonGroup>
                 <Button>Create token</Button>

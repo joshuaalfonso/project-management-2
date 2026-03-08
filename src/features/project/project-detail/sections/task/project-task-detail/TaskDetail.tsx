@@ -3,6 +3,7 @@ import { useProjectTaskDialog } from "../hooks/useProjectTaskDialog"
 import { useTaskDetail } from "../hooks/useTaskDetail";
 import { TaskDetailDataList } from "./TaskDetailDataList";
 import SubtaskList from "./SubtaskList";
+import { EmptyList } from "@/shared/components/EmptyState";
 
 
 
@@ -54,7 +55,11 @@ export const TaskDetail = () => {
                                         </Tabs.List>
 
                                         <Tabs.Content value="subtasks">
-                                            <SubtaskList subtasks={taskDetail.subtasks ?? []} />
+                                            { taskDetail.subtasks.length > 0 ? (
+                                                <SubtaskList 
+                                                    subtasks={taskDetail.subtasks ?? []} 
+                                                />
+                                            ) : <EmptyList /> }
                                         </Tabs.Content>
                                         <Tabs.Content value="comments">
                                             Manage your comments

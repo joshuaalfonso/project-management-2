@@ -18,24 +18,6 @@ const ProjectDetail = () => {
 
     const currentTab = location.pathname.split("/").pop() ?? "overview";
 
-    // console.log(project_id)
-    // console.log(currentTab)
-
-    // const tabs = [
-    //     { value: "overview", label: "Overview" },
-    //     { value: "task", label: "Task" },
-    //     { value: "attachment", label: "Attachment" },
-    //     { value: "setting", label: "Setting" },
-    // ];
-
-    // const MotionBox = motion(Box);
-
-    // const tabVariants = {
-    // hidden: { opacity: 0, y: 50 },
-    // enter: { opacity: 1, y: 0 },
-    // exit: { opacity: 0, y: -50 },
-    // };
-
     if (isPending) return <p>Loading ...</p>;
     if (error) return <p> Failed to load detail.</p>;
 
@@ -121,8 +103,6 @@ const ProjectDetail = () => {
 
             </Tabs.Root>
 
-
-        
         </>
     )
 }

@@ -29,3 +29,9 @@ export const DateDifferenceDisplay = (date: string) => {
     }
 
 }
+
+
+export const formatToCalendarDate = (iso: string) => {
+  if (!iso) return undefined
+  return  new Date(iso).toISOString().split("T")[0]
+}

@@ -5,7 +5,7 @@ import ProjectCardList from "@/features/project/project-list/project-card/Projec
 import ProjectDialog from "@/features/project/project-dialog/ProjectDialog";
 import { ProjectDialogProvider } from "@/features/project/project-dialog/useProjectDialog";
 import { FiPlus } from "react-icons/fi";
-import { useModalStore } from "@/store/modal.store";
+import { useModalStore } from "@/shared/store/modal.store";
 
 
 

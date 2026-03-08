@@ -259,6 +259,7 @@ export const TaskDetailDataList = ({taskDetail}: Props) => {
                         Attachment
                     </Stack>
                 </DataList.ItemLabel>
+                
                 <DataList.ItemValue className="w-full ">
 
                     {taskDetail.attachment.length > 0 ? (

@@ -304,18 +304,13 @@ const ProjectTaskDialog = () => {
                                         </Field.Root>
 
                                         <Field.Root>
-                                            <Field.Label>End Date</Field.Label>
-                                            <Input
-                                                type="date"
-                                                autoComplete="off"
-                                                {...register("end_date", { required: "End date is required" })}
-                                                tabIndex={-1}
+                                            <RHFDatePicker
+                                                name="end_date"
+                                                label="End Date"
+                                                control={control}
+                                                errors={errors}
+                                                rules={{ required: "End date is required" }}
                                             />
-                                            {errors.end_date && (
-                                                <Text color="fg.error" fontSize="sm">
-                                                    {errors.end_date.message}
-                                                </Text>
-                                            )}
                                         </Field.Root>
                                     </div>
 

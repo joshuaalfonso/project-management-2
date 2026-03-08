@@ -6,11 +6,11 @@ import { getErrorMessage } from "@/lib/axios"
 import TiptapEditor from "@/shared/components/TiptapEdit"
 import { useCreateProject } from "./useCreateProject"
 import RHFDatePicker from "@/shared/components/RHFDatePicker"
-import { useModalStore } from "@/store/modal.store"
+import { useModalStore } from "@/shared/store/modal.store"
 import { useProject } from "../project-list/hooks/useProject"
 import { useEffect, useMemo } from "react"
-import { formatToCalendarDate } from "@/lib/date"
 import { useUpdateProject } from "./useUpdateProject"
+import { formatToCalendarDate } from "@/lib/dateFormat"
 
 
 interface ProjectFormvalues {
@@ -119,6 +119,7 @@ const ProjectDialog = () => {
         <Dialog.Root 
             placement={'center'} 
             size={{ mdDown: "full", md: "lg" }}
+            scrollBehavior="inside"
             open={type === 'createProject'} 
             onOpenChange={({open}) => {
                 if (!open) {

@@ -2,7 +2,7 @@ import { Box, Button, Heading, Menu, Portal, Tag } from "@chakra-ui/react"
 import type { ProjectList } from "../project.model"
 import { useNavigate } from "react-router-dom"
 import { FiEdit, FiEye, FiMoreHorizontal, FiTrash2 } from "react-icons/fi"
-import { useModalStore } from "@/store/modal.store"
+import { useModalStore } from "@/shared/store/modal.store"
 
 
 interface Props {
